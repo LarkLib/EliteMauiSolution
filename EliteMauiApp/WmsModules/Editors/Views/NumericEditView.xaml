@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:viewModel="clr-namespace:Elite.LMS.Maui.WmsModules.Editors.ViewModels"
+    ios:Page.UseSafeArea="False"
+    x:Class="Elite.LMS.Maui.Views.NumericEditView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <wms:EditorsAndControlsResources/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:NumericEditViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <dx:DXDockLayout Padding="{OnIdiom Phone=0, Tablet='92,12'}" BackgroundColor="{dx:ThemeColor Surface}">
+            <dxe:NumericEdit
+                dx:DXDockLayout.Dock="Top" 
+                Value="{Binding Value}"
+                MinValue="{Binding MinValue}"
+                MaxValue="{Binding MaxValue}"
+                StepValue="{Binding StepValue}"
+                LabelText="Numeric Edit"
+                AllowLooping="{Binding AllowLooping}"
+                SelectValueOnFocus="{Binding SelectValueOnFocus}"
+                IsUpDownIconVisible="{Binding IsUpDownIconsVisible}"
+                DisplayFormat="{Binding DisplayFormat.Value}"
+                UpDownIconAlignment="{Binding UpDownIconsAlignment.Value}"
+                VerticalOptions="Center"
+                HasError="{Binding ActualHasError}"
+                ErrorText="{Binding ActualErrorText}"
+                HelpText="{Binding ActualHelpText}"
+                TextHorizontalAlignment="{Binding UpDownIconsAlignment.TextAlignment}"
+                Margin="16,32,16,32"/>
+            <dx:DXSeparator dx:DXDockLayout.Dock="Top"/>
+
+            <wms:ScrollViewFix>
+                <StackLayout Padding="0" Spacing="0">
+                    <Grid Margin="16,18" ColumnSpacing="14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <dxe:NumericEdit x:Name="minValue" Grid.Column="0" LabelText="Min Value" Value="{Binding MinValue}" />
+                        <dxe:NumericEdit x:Name="maxValue" Grid.Column="1" LabelText="Max Value" Value="{Binding MaxValue}" />
+                        <dxe:NumericEdit x:Name="stepValue" Grid.Column="2" LabelText="Step Value" Value="{Binding StepValue}" />
+                    </Grid>
+
+                    <dx:DXSeparator SideMargin="0"/>
+                    <StackLayout Style="{StaticResource LayoutItemContainerStyle}">
+                        <StackLayout Style="{StaticResource SwitchItemContainerStyle}">
+                            <Label Text="Allow Looping" Style="{StaticResource TextStyle}"/>
+                            <Switch x:Name="allowLooping" Style="{DynamicResource SwitchStyle}" IsToggled="{Binding AllowLooping}"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <dx:DXSeparator SideMargin="0"/>
+
+                    <StackLayout Style="{StaticResource LayoutItemContainerStyle}">
+                        <StackLayout Style="{StaticResource SwitchItemContainerStyle}">
+                            <Label Text="Select On Focus" Style="{StaticResource TextStyle}"/>
+                            <Switch x:Name="selectValueOnFocus" Style="{DynamicResource SwitchStyle}" IsToggled="{Binding SelectValueOnFocus}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <dx:DXSeparator SideMargin="0"/>
+
+                    <StackLayout Style="{StaticResource LayoutItemContainerStyle}">
+                        <Label Text="Display Format" Style="{StaticResource TextStyle}"/>
+                        <dxe:ComboBoxEdit
+                            DisplayMember="Name"
+                            ValueMember="Value"
+                            BorderThickness="0"
+                            ItemsSource="{Binding DisplayFormats}"
+                            SelectedItem="{Binding DisplayFormat}"
+                            Style="{StaticResource ComboBoxStyleBase}"/>
+                    </StackLayout>
+
+                    <dx:DXSeparator SideMargin="0"/>
+
+                    <StackLayout Style="{StaticResource LayoutItemContainerStyle}">
+                        <Label Text="Up and Down Icons Alignment" Style="{StaticResource TextStyle}"/>
+                        <dxe:ComboBoxEdit
+                            x:Name="alignmentComboBox"
+                            DisplayMember="Name"
+                            ValueMember="Value"
+                            BorderThickness="0"
+                            ItemsSource="{Binding Alignments}"
+                            SelectedItem="{Binding UpDownIconsAlignment}"
+                            Style="{StaticResource ComboBoxStyleBase}"/>
+                    </StackLayout>
+
+                    <dx:DXSeparator SideMargin="0"/>
+
+                    <StackLayout Style="{StaticResource LayoutItemContainerStyle}">
+                        <StackLayout Style="{StaticResource SwitchItemContainerStyle}">
+                            <Label Text="Is Up and Down Icons Visible" Style="{StaticResource TextStyle}"/>
+                            <Switch x:Name="isUpDownIconVisible" Style="{DynamicResource SwitchStyle}" IsToggled="{Binding IsUpDownIconsVisible}"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <dx:DXSeparator SideMargin="0"/>
+
+                    <Grid ColumnSpacing="8" Margin="16" ColumnDefinitions="0.5*, 0.5*">
+                        <dxco:SimpleButton Text="Toggle Error"
+                                          Command="{Binding ToggleErrorCommand}"
+                                          HorizontalOptions="FillAndExpand" />
+                        <dxco:SimpleButton Text="Reset to Default"
+                                          Command="{Binding ResetToDefaultCommand}"
+                                          HorizontalOptions="FillAndExpand"
+                                           Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+            </wms:ScrollViewFix>
+        </dx:DXDockLayout>
+    </ContentPage.Content>
+</wms:WmsPage>

@@ -1,0 +1,22 @@
+using System.Collections.Generic;
+using Elite.LMS.Maui.Data;
+
+namespace Elite.LMS.Maui.ViewModels {
+    public class OscillatorChartsViewModel : ChartViewModelBase {
+        readonly OscillatorDataProvider dataProvider = new OscillatorDataProvider();
+        List<NumericData> oscillatorSeriesData;
+
+        public List<NumericData> OscillatorSeriesData {
+            get => oscillatorSeriesData;
+            set => SetProperty(ref oscillatorSeriesData, value);
+        }
+
+        public OscillatorChartsViewModel() {
+            MoveToNextFrame();
+        }
+
+        public void MoveToNextFrame() {
+            OscillatorSeriesData = dataProvider.GenerateNextData();
+        }
+    }
+}

@@ -1,0 +1,54 @@
+﻿<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+    xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+    xmlns:vm="clr-namespace:Elite.LMS.Maui.ViewModels"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+    xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+    xmlns:local="clr-namespace:Elite.LMS.Maui"
+    x:Class="Elite.LMS.Maui.AppShell"
+    x:Name="appShell"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{dx:ThemeColor Surface}">
+    
+    <Shell.FlyoutHeader>
+        <StackLayout BackgroundColor="Transparent">
+            <Grid ColumnDefinitions="48, *" Margin="4,24,16,16">
+                <dx:DXImage Source="dx"
+                    TintColor="{dx:ThemeColor OnSurface}"
+                    VerticalOptions="Center"
+                    HeightRequest="24"/>
+                <Label TextColor="{dx:ThemeColor OnSurface}"
+                       FontSize="22"
+                       Text="{Binding TitleText}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       Grid.Column="1" />
+            </Grid>
+            <Label Margin="16,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="{Binding Description}"
+                   FontSize="14"/>
+            <Label Margin="16,20,16,0"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="{Binding Version}"
+                   FontSize="14"/>
+            <dx:DXSeparator Orientation="Horizontal" Margin="16,20"/>
+            <dxcv:DXCollectionView ItemsSource="{Binding MenuItems}">
+                <dxcv:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <dx:DXButton ButtonType="Text" HorizontalContentAlignment="Fill" 
+                            Command="{Binding Source={x:Reference appShell}, Path=BindingContext.OpenWebCommand}" CommandParameter="{Binding}"
+                            Content="{Binding Name}" Icon="{Binding Icon}" IconWidth="24" IconHeight="24" IconIndent="16" />
+                    </DataTemplate>
+                </dxcv:DXCollectionView.ItemTemplate>
+            </dxcv:DXCollectionView>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <ShellContent FlyoutItemIsVisible="False"
+        BindingContext="{Binding}"
+        ContentTemplate="{DataTemplate views:MainPage}"/>
+</Shell>

@@ -1,0 +1,50 @@
+using Elite.LMS.Maui.ViewModels;
+
+namespace Elite.LMS.Maui.WmsModules.Grid.Data {
+    public class OrderEntry : NotificationObject {
+        Commodity commodity;
+        double amount;
+        double price;
+        double total;
+
+        public Commodity Commodity {
+            get { return commodity; }
+            set {
+                commodity = value;
+                OnPropertyChanged(nameof(Commodity));
+            }
+        }
+        public double Amount {
+            get { return amount; }
+            set {
+                amount = value;
+                OnPropertyChanged(nameof(Amount));
+                UpdateTotal(raiseChanged: true);
+            }
+        }
+        public double Price {
+            get { return amount; }
+            set {
+                amount = value;
+                OnPropertyChanged(nameof(Price));
+                UpdateTotal(raiseChanged: true);
+            }
+        }
+        public double Total {
+            get { return total; }
+        }
+
+        public OrderEntry(Commodity commodity, double amount, double price) {
+            this.commodity = commodity;
+            this.amount = amount;
+            this.price = price;
+            UpdateTotal(raiseChanged: false);
+        }
+
+        void UpdateTotal(bool raiseChanged) {
+            total = price * amount;
+            if (raiseChanged)
+                OnPropertyChanged(nameof(Total));
+        }
+    }
+}

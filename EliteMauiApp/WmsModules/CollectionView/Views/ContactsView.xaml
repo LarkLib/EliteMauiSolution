@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+             xmlns:resources="clr-namespace:Elite.LMS.Maui.WmsModules.Resources"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+             x:Class="Elite.LMS.Maui.WmsModules.CollectionView.Views.ContactsView"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:CollectionViewResources/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <views:CallTypeToIconConverter x:Key="callTypeIconConverter"/>
+            <views:UpperCaseConverter x:Key="upperCaseConverter"/>
+
+            <DataTemplate x:Key="iconItemTemplate">
+                <Grid Padding="{OnIdiom Phone='2, 8, 18, 7', Tablet='2, 8, 37, 7'}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="44"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"
+                          Margin="0"
+                          ColumnSpacing="22"
+                          RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Grid.RowSpan="2" Margin="0"
+                                Fill="{Binding CategoryColor}"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="Center">
+                        </Ellipse>
+                        <Label Grid.RowSpan="2"
+                               Margin="0"
+                               Text="{Binding Initials}"
+                               TextColor="White"
+                               BackgroundColor="Transparent"
+                               FontSize="20"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Center"/>
+                    </Grid>
+                    <StackLayout Grid.Column="1"
+                                 Padding="18,1,18,7"
+                                 Orientation="Vertical">
+                        <Label Text="{Binding Name}"
+                               Margin="0,2"
+                               FontSize="16"
+                               TextColor="{dx:ThemeColor OnSurface}"/>
+                        <Label Text="{Binding Phone}"
+                               FontSize="15"
+                               TextColor="{dx:ThemeColor OnSurfaceVariant}"/>
+                    </StackLayout>
+                    <dx:DXImage Grid.Column="2"
+                                Source="{Binding CallType, Converter={StaticResource callTypeIconConverter}}"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                    <dx:DXImage Grid.Column="3"
+                                TintColor="{dx:ThemeColor OnSurfaceVariant}"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="20"
+                                WidthRequest="20"
+                                Source="wmstabviewdetail"/>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="photoItemTemplate">
+                <Grid Padding="{OnIdiom Phone='2, 8, 18, 7', Tablet='2, 8, 37, 7'}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="44"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Margin="0"
+                                Fill="White"
+                                Stroke="{dx:ThemeColor OutlineVariant}"
+                                StrokeThickness="1"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                    </Ellipse>
+                    <Image Source="{Binding Contact.Photo}" VerticalOptions="Center"
+                                    HorizontalOptions="Center" WidthRequest="48" HeightRequest="48">
+                        <Image.Clip>
+                            <EllipseGeometry RadiusX="24" RadiusY="24" Center="24, 24" />
+                        </Image.Clip>
+                    </Image>
+                    <StackLayout Grid.Column="1"
+                                 Padding="18,1,18,7"
+                                 Orientation="Vertical">
+                        <Label Text="{Binding Name}"
+                               Margin="0,2"
+                               FontSize="16"
+                               TextColor="{dx:ThemeColor OnSurface}"/>
+                        <Label Text="{Binding Phone}"
+                               FontSize="15"
+                               TextColor="{dx:ThemeColor OnSurfaceVariant}"/>
+                    </StackLayout>
+                    <dx:DXImage Grid.Column="2"
+                                Source="{Binding CallType, Converter={StaticResource callTypeIconConverter}}"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                    <dx:DXImage Grid.Column="3"
+                                TintColor="{dx:ThemeColor OnSurfaceVariant}"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="EndAndExpand"
+                                HeightRequest="20"
+                                WidthRequest="20"
+                                Source="wmstabviewdetail"/>
+                </Grid>
+            </DataTemplate>
+
+            <views:ContactItemTemplateSelector x:Key="contactItemTemplateSelector"
+                                       PhotoTemplate="{StaticResource photoItemTemplate}"
+                                       IconTemplate="{StaticResource iconItemTemplate}"/>
+
+            <DataTemplate x:Key="groupItemTemplate">
+                <StackLayout Padding="{OnIdiom Phone='2,0,18,10', Tablet='2,0,37,10'}">
+                    <Label Margin="0,20,0,4"
+                           TextColor="{dx:ThemeColor OnSurfaceVariant}"
+                           Text="{Binding Value, StringFormat='{0:d}', Converter={StaticResource upperCaseConverter}}"/>
+                    <dx:DXSeparator Orientation="Horizontal"/>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid BackgroundColor="{dx:ThemeColor Surface}">
+            <dxcv:DXCollectionView x:Name="collectionView"
+                                   AllowGroupCollapse="False"
+                                   GroupHeaderTemplate="{StaticResource groupItemTemplate}"
+                                   ItemTemplate="{StaticResource contactItemTemplateSelector}"
+                                   ItemsSource="{Binding Recent}"
+                                   Tap="ItemSelected"
+                                   Margin="{OnIdiom Phone='16,0,0,0', Tablet='37,0,0,0'}">
+                <dxcv:DXCollectionView.GroupDescription>
+                    <dxcv:GroupDescription FieldName="Date" SortOrder="Descending"/>
+                </dxcv:DXCollectionView.GroupDescription>
+            </dxcv:DXCollectionView>
+        </Grid>
+    </ContentPage.Content>
+</wms:WmsPage>

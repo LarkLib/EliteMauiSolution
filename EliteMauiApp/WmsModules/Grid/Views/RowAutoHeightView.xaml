@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:BaseGridContentPage
+    x:Class="Elite.LMS.Maui.Views.RowAutoHeightView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
+    xmlns:views="clr-namespace:Elite.LMS.Maui.Views;assembly=Elite.LMS.Maui">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{dx:ThemeColor OnSurface}"/>
+        </Style>
+        <DataTemplate x:Key="compactTemplate">
+            <dx:DXDockLayout Margin="10" VerticalSpacing="10" StretchLastItem="False">
+                <dx:DXDockLayout dx:DXDockLayout.Dock="Top" HorizontalSpacing="10" VerticalSpacing="7">
+                    <dx:DXBorder dx:DXDockLayout.Dock="Left" BorderColor="{dx:ThemeColor OutlineVariant}" BorderThickness="1" MaximumHeightRequest="72" WidthRequest="62">
+                        <Image Source="{Binding Item.Photo}" Aspect="AspectFill" />
+                    </dx:DXBorder >
+                    <Label dx:DXDockLayout.Dock="Top" Text="{Binding Item.Name}" />
+                    <Label dx:DXDockLayout.Dock="Top" Text="{Binding Item.Position}" />
+                    <Label dx:DXDockLayout.Dock="Top" Text="{Binding Item.Phone}" />
+                </dx:DXDockLayout>
+                <Label dx:DXDockLayout.Dock="Top" Text="{Binding Item.Notes}" />
+            </dx:DXDockLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="detailedTemplate">
+            <VerticalStackLayout Spacing="0" Padding="16">
+                <dx:DXDockLayout HorizontalSpacing="16" VerticalSpacing="10" StretchLastItem="False">
+                    <dx:DXBorder dx:DXDockLayout.Dock="Left" BorderColor="{dx:ThemeColor OutlineVariant}">
+                        <Image Source="{Binding Item.Photo}" Aspect="AspectFit" HeightRequest="130" WidthRequest="100" />
+                    </dx:DXBorder >
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                        <Label dx:DXDockLayout.Dock="Left" Text="Name:" FontAttributes="Bold" WidthRequest="70"/>
+                        <Label Text="{Binding Item.Name}"/>
+                    </dx:DXDockLayout>
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                        <Label dx:DXDockLayout.Dock="Left" Text="Position:" FontAttributes="Bold" WidthRequest="70"/>
+                        <Label Text="{Binding Item.Position}"/>
+                    </dx:DXDockLayout>
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                        <Label dx:DXDockLayout.Dock="Left" Text="Phone:" FontAttributes="Bold" WidthRequest="70"/>
+                        <Label Text="{Binding Item.Phone}"/>
+                    </dx:DXDockLayout>
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                        <Label dx:DXDockLayout.Dock="Left" Text="Email:" FontAttributes="Bold" WidthRequest="70"/>
+                        <Label Text="{Binding Item.Email}"/>
+                    </dx:DXDockLayout>
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                        <Label dx:DXDockLayout.Dock="Left" Text="Address:" FontAttributes="Bold" WidthRequest="70"/>
+                        <Label Text="{Binding Item.Address}"/>
+                    </dx:DXDockLayout>
+                </dx:DXDockLayout>
+                <Label Text="{Binding Item.Notes}" Margin="0,16,0,0" Grid.Row="1"/>
+            </VerticalStackLayout>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <dxg:DataGridView ItemsSource="{Binding Path=Customers}" IsReadOnly="true" IsColumnHeaderVisible="false">
+            <dxg:DataGridView.Columns>
+                <dxg:TemplateColumn FieldName="Name" DisplayTemplate="{OnIdiom Phone={StaticResource compactTemplate}, Tablet={StaticResource detailedTemplate}}">
+                </dxg:TemplateColumn>
+            </dxg:DataGridView.Columns>
+        </dxg:DataGridView>
+    </ContentPage.Content>
+</views:BaseGridContentPage>

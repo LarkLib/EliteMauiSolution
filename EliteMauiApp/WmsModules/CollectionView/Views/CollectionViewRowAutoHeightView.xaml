@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:resources="clr-namespace:Elite.LMS.Maui.WmsModules.Resources"
+             x:Class="Elite.LMS.Maui.WmsModules.CollectionView.Views.CollectionViewRowAutoHeightView"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:CollectionViewResources/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="{dx:ThemeColor OnSurface}"/>
+            </Style>
+
+            <DataTemplate x:Key="compactTemplate">
+                <dx:DXDockLayout Margin="10" VerticalSpacing="10" StretchLastItem="False">
+                    <dx:DXDockLayout dx:DXDockLayout.Dock="Top" HorizontalSpacing="10" VerticalSpacing="7">
+                        <Image dx:DXDockLayout.Dock="Left" Source="{Binding Photo}" Aspect="AspectFill" WidthRequest="62" HeightRequest="80"/>
+                        <Label dx:DXDockLayout.Dock="Top" Text="{Binding Name}" />
+                        <Label dx:DXDockLayout.Dock="Top" Text="{Binding Position}" />
+                        <Label dx:DXDockLayout.Dock="Top" Text="{Binding Phone}" />
+                    </dx:DXDockLayout>
+                    <Label dx:DXDockLayout.Dock="Top" Text="{Binding Notes}" />
+                    <dx:DXSeparator dx:DXDockLayout.Dock="Top" />
+                </dx:DXDockLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="detailedTemplate">
+                <VerticalStackLayout Spacing="0" Padding="16">
+                    <dx:DXDockLayout HorizontalSpacing="16" VerticalSpacing="10" StretchLastItem="False">
+                        <Image dx:DXDockLayout.Dock="Left" Source="{Binding Photo}" Aspect="AspectFill" HeightRequest="130" WidthRequest="100" />
+                        <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                            <Label dx:DXDockLayout.Dock="Left" Text="Name:" FontAttributes="Bold" WidthRequest="70"/>
+                            <Label Text="{Binding Name}"/>
+                        </dx:DXDockLayout>
+                        <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                            <Label dx:DXDockLayout.Dock="Left" Text="Position:" FontAttributes="Bold" WidthRequest="70"/>
+                            <Label Text="{Binding Position}"/>
+                        </dx:DXDockLayout>
+                        <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                            <Label dx:DXDockLayout.Dock="Left" Text="Phone:" FontAttributes="Bold" WidthRequest="70"/>
+                            <Label Text="{Binding Phone}"/>
+                        </dx:DXDockLayout>
+                        <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                            <Label dx:DXDockLayout.Dock="Left" Text="Email:" FontAttributes="Bold" WidthRequest="70"/>
+                            <Label Text="{Binding Email}"/>
+                        </dx:DXDockLayout>
+                        <dx:DXDockLayout dx:DXDockLayout.Dock="Top">
+                            <Label dx:DXDockLayout.Dock="Left" Text="Address:" FontAttributes="Bold" WidthRequest="70"/>
+                            <Label Text="{Binding Address}"/>
+                        </dx:DXDockLayout>
+                    </dx:DXDockLayout>
+                    <Label Text="{Binding Notes}" Margin="0,16,0,0" />
+                    <dx:DXSeparator Margin="0,16,0,0"/>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <dxcv:DXCollectionView
+            x:Name="collectionView"
+            BackgroundColor="{dx:ThemeColor Surface}"
+            ItemsSource="{Binding ItemSource}"
+            ItemTemplate="{OnIdiom Phone={StaticResource compactTemplate}, Tablet={StaticResource detailedTemplate}}">
+        </dxcv:DXCollectionView>
+    </ContentPage.Content>
+</wms:WmsPage>

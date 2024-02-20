@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage x:Class="Elite.LMS.Maui.Views.PointsCharts"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxc="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
+             xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+             xmlns:local="clr-namespace:Elite.LMS.Maui"
+             xmlns:view="clr-namespace:Elite.LMS.Maui.Charts.Views"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="pointChartTemplate">
+            <view:PointChartContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="bubbleChartTemplate">
+            <view:BubbleChartContainer/>
+        </DataTemplate>
+
+        <dxc:SeriesHintOptions x:Key="pointSeriesHintOptions"
+                                  PointTextPattern="{}{A$LLLL}: {V}°C"/>        
+        <local:PointChartTemplateSelector x:Key="pointChartTemplateSelector"
+                                          PointChartTemplate="{StaticResource pointChartTemplate}"
+                                          BubbleChartTemplate="{StaticResource bubbleChartTemplate}"/>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,8,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{dx:ThemeColor Surface}">
+        <dxco:TabView x:Name="dxTabView"
+                      HorizontalOptions="FillAndExpand"
+
+                      ScrollAnimationEnabled="True"
+                      SwipeEnabled="False"
+
+                      ItemsSource="{Binding Content}"
+                      ItemTemplate="{StaticResource pointChartTemplateSelector}"
+
+                      ItemHeaderIconDataMember="PointTypeImage"
+                      HeaderPanelContentAlignment="Start"
+                      HeaderPanelIndent="0"
+                      HeaderPanelItemSpacing="0"
+                      HeaderPanelPadding="0"
+
+                      IsSelectedItemIndicatorVisible="True"
+                      IsHeaderPanelShadowVisible="False"
+
+                      SelectedItem="{Binding SelectedItem}" />
+    </Grid>
+</wms:WmsPage>

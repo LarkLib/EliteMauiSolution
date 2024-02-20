@@ -1,0 +1,19 @@
+﻿<views:TitleViewFix
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui"
+    xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    x:Class="Elite.LMS.Maui.Wms.TitleView"
+    x:Name="self">    
+        <Label FontSize="17"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                Margin="0"
+                TextColor="{dx:ThemeColor OnSurface}"
+                BackgroundColor="Transparent"
+                Text="{Binding Title, Source={Reference self}}"
+                LineBreakMode="NoWrap">
+        </Label>   
+</views:TitleViewFix>

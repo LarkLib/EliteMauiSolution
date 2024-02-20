@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:helpers="clr-namespace:Elite.LMS.Maui"
+    x:Class="Elite.LMS.Maui.Views.EditBioPage"
+    Title="Bio"
+    ios:Page.UseSafeArea="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnAccept" IconImageSource="check_24px" />
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout BackgroundColor="{dx:ThemeColor Surface}">
+        <dxe:MultilineEdit
+            x:Name="bioEditor"
+            Loaded="OnEditorLoaded" 
+            BackgroundColor="Transparent"
+            Margin="5"
+            BoxMode="Filled"
+            HelpText="{x:Static helpers:BioHelper.detailText}"
+            HelpTextColor="Gray"
+            MaxCharacterCount="100" />
+    </VerticalStackLayout>
+</wms:WmsPage>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wms:WmsPage x:Class="Elite.LMS.Maui.Views.AreaCharts"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+             xmlns:local="clr-namespace:Elite.LMS.Maui"
+             xmlns:view="clr-namespace:Elite.LMS.Maui.Charts.Views"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="rangeAreaChartTemplate">
+            <view:RangeAreaChartContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="areaChartTemplate">
+            <view:AreaChartContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="stackedAreaChartTemplate">
+            <view:StackedAreaChartContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="fullStackedAreaChartTemplate">
+            <view:FullStackedAreaChartContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="stepAreaChartTemplate">
+            <view:StepAreaChartContainer/>
+        </DataTemplate>
+
+        <local:AreaChartTemplateSelector x:Key="areaChartTemplateSelector"
+                                         RangeAreaChartTemplate="{StaticResource rangeAreaChartTemplate}"
+                                         AreaChartTemplate="{StaticResource areaChartTemplate}"
+                                         StackedAreaChartTemplate="{StaticResource stackedAreaChartTemplate}"
+                                         FullStackedAreaChartTemplate="{StaticResource fullStackedAreaChartTemplate}"
+                                         StepAreaChartTemplate="{StaticResource stepAreaChartTemplate}"/>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,8,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{dx:ThemeColor Surface}">
+        <dxco:TabView x:Name="dxTabView"
+                      HorizontalOptions="FillAndExpand"
+                      ScrollAnimationEnabled="True"
+                      SwipeEnabled="False"
+                      ItemsSource="{Binding Content}"
+                      ItemHeaderIconDataMember = "AreaTypeImage"
+                      ItemTemplate="{StaticResource areaChartTemplateSelector}"
+                      HeaderPanelContentAlignment="Start"
+                      HeaderPanelIndent="0"
+                      HeaderPanelItemSpacing="0"
+                      HeaderPanelPadding="0"
+                      IsSelectedItemIndicatorVisible="True"
+                      IsHeaderPanelShadowVisible="False"
+                      SelectedItem="{Binding SelectedItem}" />
+    </Grid>
+</wms:WmsPage>

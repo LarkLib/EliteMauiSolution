@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="EliteMauiApp.projitem" />
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);PaidWmsModules</DefineConstants>
+    <NoWarn>$(NoWarn);IL2105</NoWarn>
+    <TargetFrameworks>net8.0-android</TargetFrameworks>
+    <AssemblyName>EliteMauiApp</AssemblyName>
+    <RootNamespace>Elite.LMS.Maui</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidResource Remove="Platforms\Android\WmsModules\**" />
+    <AndroidResource Remove="WmsModules\**" />
+    <Compile Remove="Platforms\Android\WmsModules\**" />
+    <Compile Remove="WmsModules\**" />
+    <EmbeddedResource Remove="Platforms\Android\WmsModules\**" />
+    <EmbeddedResource Remove="WmsModules\**" />
+    <MauiCss Remove="Platforms\Android\WmsModules\**" />
+    <MauiCss Remove="WmsModules\**" />
+    <MauiImage Remove="WmsModules\**" />
+    <MauiXaml Remove="Platforms\Android\WmsModules\**" />
+    <MauiXaml Remove="WmsModules\**" />
+    <None Remove="Platforms\Android\WmsModules\**" />
+    <None Remove="WmsModules\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Wms\Data\ChartsData.cs" />
+    <Compile Remove="Wms\Data\ChartsDataAdvanced.cs" />
+    <Compile Remove="Wms\Data\CollectionViewData.cs" />
+    <Compile Remove="Wms\Data\ControlsData.cs" />
+    <Compile Remove="Wms\Data\DataFormData.cs" />
+    <Compile Remove="Wms\Data\DataGridAdvanced.cs" />
+    <Compile Remove="Wms\Data\EditorsData.cs" />
+    <Compile Remove="Wms\Data\GridData.cs" />
+    <Compile Remove="Wms\Data\OfficeFileAPIData.cs" />
+    <Compile Remove="Wms\Data\SchedulerData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="EliteMauiApp.projitem" />
+    <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+    <Compile Include="WmsModules\Models\IBarcodeReceiver.cs" />
+    <Compile Include="WmsModules\Services\swaggerClient.cs" />
+    <Compile Include="WmsModules\Services\WmsService.cs" />
+    <Compile Include="WmsModules\ViewModels\Matrial\InboundViewModel.cs" />
+    <Compile Include="WmsModules\Views\Matrial\InboundView.xaml.cs">
+      <DependentUpon>InboundView.xaml</DependentUpon>
+    </Compile>
+    <!--<PackageReference Include="DevExpress.Document.Processor" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Pdf.Core" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Printing.Core" Version="23.2.3" />
+    <PackageReference Include="DevExpress.RichEdit.Export" Version="23.2.3" />-->
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />
+	<PackageReference Include="DevExpress.Drawing" Version="23.2.3" />
+	<PackageReference Include="DevExpress.Maui.Core" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.Controls" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.DataGrid" Version="23.2.3" />
+    <!--<PackageReference Include="DevExpress.Maui.Charts" Version="23.2.3" />-->
+    <PackageReference Include="DevExpress.Maui.CollectionView" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.Editors" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.Gauges" Version="23.2.3" />
+    <!--<PackageReference Include="DevExpress.Maui.Scheduler" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.DataGrid.Export" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.HtmlEditor" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Maui.Pdf" Version="23.2.3" />-->
+
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	<PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiXaml Include="WmsModules\Views\Matrial\InboundView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Wms\Views\NewPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>
