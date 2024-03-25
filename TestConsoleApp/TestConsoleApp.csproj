@@ -17,9 +17,6 @@
 	  </PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\MauiWmsServiceProxy\MauiWmsServiceProxy.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 	  <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" Namespace="Elite.LMS.Maui.WmsModules.Services" ClassName="SwaggerClient">
 	    <SourceUri>http://localhost:8030/swagger/v1/swagger.json</SourceUri>
 	  </OpenApiReference>

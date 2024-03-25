@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Elite.LMS.Maui.MainPage"
+             xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             >
+
+    <Grid IgnoreSafeArea="True">
+        <Grid BackgroundColor="AliceBlue" RowDefinitions="*,*">
+            <Ellipse Fill="AliceBlue" WidthRequest="300" HeightRequest="300" Margin="0,0,300,10" Grid.Row="0"/>
+            <Ellipse Fill="AliceBlue" WidthRequest="300" HeightRequest="300" Margin="300,150,0,0" Grid.Row="1"/>
+        </Grid>
+
+        <ScrollView Orientation="Vertical">
+            <!--<StackLayout Orientation="Vertical"/>-->
+            <Label Text="StackLayout Orientation"
+    FontSize="22"
+    VerticalOptions="Center"
+    MaxLines="1"
+    LineBreakMode="TailTruncation"
+    HorizontalTextAlignment="Center"
+    Margin="{OnPlatform Android='0, 0, 20, 0', iOS='0'}"
+    TextColor="Black"/>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
