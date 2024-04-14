@@ -5,7 +5,7 @@
         public AppShell()
         {
             InitializeComponent();
-            //BindingContext = new Core.ViewModels.MainViewModel();
+            BindingContext = new ViewModels.MainViewModel();
         }
     }
 }

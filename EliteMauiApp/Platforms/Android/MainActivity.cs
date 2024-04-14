@@ -3,8 +3,6 @@ using Android.Content.PM;
 using Microsoft.Maui;
 using Android.OS;
 using Android.Content;
-using Microsoft.Maui.Controls;
-using Elite.LMS.Maui.WmsModules.Models;
 
 namespace Elite.LMS.Maui
 {

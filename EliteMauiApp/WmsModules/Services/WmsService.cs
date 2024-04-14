@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elite.LMS.Maui.Wms.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,17 +10,51 @@ namespace Elite.LMS.Maui.WmsModules.Services
 {
     internal class WmsService
     {
-        public static BaseMaterialResponseBody GetMaterialByCodeAsync(string materialCode)
+        public static PdaServiceClient ServiceClient
         {
-            var httpClient = new HttpClient();
-            var client = new SwaggerClient("http://192.168.2.35:8030", httpClient);
-            var result = client.GetMaterialByCodeAsync(materialCode).GetAwaiter().GetResult();
-            return result;
-            //var ret = ServiceProxy.GetMaterialByCodeAsync(materialCode);
-            //return ret;
-            //HttpClient client = new HttpClient();
-            //var response = client.GetStringAsync("https://cn.bing.com/").GetAwaiter().GetResult();
-            //var response = client.GetStringAsync("http://192.168.2.35:8030/mauiApi/getMaterialByCode?materialCode=CF-000151").GetAwaiter().GetResult();
+            get
+            {
+                var httpClient = new HttpClient();
+                httpClient.Timeout = TimeSpan.FromSeconds(5);
+                var client = new PdaServiceClient(httpClient);
+                client.BaseUrl = Config.ServiceBaseUrl;
+                return client;
+            }
+        }
+        public static WarehouseQueryResponseBody GetWarehouse()
+        {
+            return ServiceClient.GetWarehouseAsync().GetAwaiter().GetResult();
+        }
+
+        public static StationQueryResponseBody GetStationByWarehouse(long? warehouseId, string stationType)
+        {
+            return ServiceClient.GetStationByWarehouseAsync(new StationQueryRequestBody { WarehouseID = warehouseId, StationType = stationType }).GetAwaiter().GetResult();
+        }
+
+        public static WmsResponseBody MaterialInbound(MaterialInboundRequestBody body)
+        {
+            return ServiceClient.MaterialInboundAsync(body).GetAwaiter().GetResult();
+        }
+
+        public static WmsResponseBody MaterialReturnInbound(MaterialInboundRequestBody body)
+        {
+            return ServiceClient.MaterialReturnInboundAsync(body).GetAwaiter().GetResult();
+        }
+        public static UserValidationResponseBody LoginUserValidation(UserValidaitonRequestBody body)
+        {
+            return ServiceClient.LoginUserValidationAsync(body).GetAwaiter().GetResult();
+        }
+        public static PlanQueryResponseBody GetManuallyIssuePlan(int warehouse)
+        {
+            return ServiceClient.GetManuallyIssuePlanAsync(warehouse).GetAwaiter().GetResult();
+        }
+        public static WmsResponseBody ExecuteManuallyIssuePlan(PlanExecuteRequestBody body)
+        {
+            return ServiceClient.ExecuteManuallyIssuePlanAsync(body).GetAwaiter().GetResult();
+        }
+        public static WmsResponseBody ManuallyIssueMaterialCheck(string body)
+        {
+            return ServiceClient.ManuallyIssueMaterialCheckAsync(body).GetAwaiter().GetResult();
         }
     }
 }

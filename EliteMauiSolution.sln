@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WmsWebApiService", "WmsWebApiService\WmsWebApiService.csproj", "{7D17CF60-2A17-4A37-87B0-8B6A53491D0B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EliteMauiApp", "EliteMauiApp\EliteMauiApp.csproj", "{7905D16D-B0A6-40C6-805E-8AB4EED0D0E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{7D20FE51-2409-4F22-88D0-F3BB99BEDAAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WmsMauiApp", "WmsMauiApp\WmsMauiApp.csproj", "{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WmsWebApiService", "WmsWebApiService\WmsWebApiService.csproj", "{EC190977-913E-46B3-A089-CD8FDCD95E1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WmsWebApiServiceCore", "WmsWebApiServiceCore\WmsWebApiServiceCore.csproj", "{A87BCD8A-49E5-4CF8-8705-9CC1F3A4943D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WmsMauiApp", "WmsMauiApp\WmsMauiApp.csproj", "{024BA5CB-2460-4851-A3FD-63F662BBDC6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7D17CF60-2A17-4A37-87B0-8B6A53491D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D17CF60-2A17-4A37-87B0-8B6A53491D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D17CF60-2A17-4A37-87B0-8B6A53491D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D17CF60-2A17-4A37-87B0-8B6A53491D0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7905D16D-B0A6-40C6-805E-8AB4EED0D0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7905D16D-B0A6-40C6-805E-8AB4EED0D0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7905D16D-B0A6-40C6-805E-8AB4EED0D0E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -30,12 +28,20 @@ Global
 		{7D20FE51-2409-4F22-88D0-F3BB99BEDAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D20FE51-2409-4F22-88D0-F3BB99BEDAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D20FE51-2409-4F22-88D0-F3BB99BEDAAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{083CEE1B-4A2C-44EB-933B-EEA04F7322C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EC190977-913E-46B3-A089-CD8FDCD95E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC190977-913E-46B3-A089-CD8FDCD95E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC190977-913E-46B3-A089-CD8FDCD95E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC190977-913E-46B3-A089-CD8FDCD95E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87BCD8A-49E5-4CF8-8705-9CC1F3A4943D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87BCD8A-49E5-4CF8-8705-9CC1F3A4943D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87BCD8A-49E5-4CF8-8705-9CC1F3A4943D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87BCD8A-49E5-4CF8-8705-9CC1F3A4943D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024BA5CB-2460-4851-A3FD-63F662BBDC6C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,26 +3,100 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Elite.LMS.Maui.MainPage"
              xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             >
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="itemTemplate">
+                <VerticalStackLayout Margin="0,10">
+                    <!--<Button 
+                            HorizontalOptions="End"
+                            Padding="20,0"
+                            FontSize="16"
+                            TextColor="Black"
+                            Command="{Binding NavigationCommand, Source={Reference mainPage}}"
+                            CommandParameter="{Binding}"
+                            Text="列表"/>-->
+                    <Label toolkit:DockLayout.DockPosition="Right" 
+                            Text="+"
+                            TextColor="Blue"
+                            FontSize="16"
+                            FontAttributes="Bold"/>
+                    <Label toolkit:DockLayout.DockPosition="Left" 
+                            Text="{Binding Title}"
+                            TextColor="Black"
+                            FontSize="16"
+                            FontAttributes="Bold"/>
+                    <FlexLayout Direction="Row"
+                            Wrap="Wrap"
+                            AlignItems="Center"
+                            AlignContent="Center"
+                            BindableLayout.ItemsSource="{Binding WmsItems}"
+                            BindableLayout.ItemTemplate="{StaticResource cardTemplate}" />
+                </VerticalStackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="cardTemplate">
+                <Grid VerticalOptions="FillAndExpand" WidthRequest="156">
+                    <Button 
+                        BackgroundColor="AliceBlue"
+                        TextColor="Black"
+                        Clicked="WmsItemTappedControlShortcut"
+                        CornerRadius="16" 
+                        Margin="7"
+                        FontSize="14"
+                        Text="{Binding Title}">
+                        <Button.Shadow>
+                            <OnPlatform x:TypeArguments="Shadow">
+                                <On Platform="iOS">
+                                    <On.Value>
+                                        <Shadow Brush="Black" Offset="0,2" Radius="2" Opacity="0.22" />
+                                    </On.Value>
+                                </On>
+                                <On Platform="Android">
+                                    <On.Value>
+                                        <Shadow Brush="Black" Offset="0,4" Radius="2" Opacity="0.15" />
+                                    </On.Value>
+                                </On>
+                            </OnPlatform>
+                        </Button.Shadow>
+                    </Button>
+                    <Label VerticalOptions="Start"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding ShowBadge}"
+                        Margin="22"
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding BadgeText}"
+                        TextColor="{DynamicResource PrimaryColor}"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.TitleView>
+        <views:TitleViewFix>
+            <toolkit:DockLayout Margin="{OnPlatform Android='0, 0, 12, 0', iOS='0, 0, 0, 6'}">
+                <Image HeightRequest="30" WidthRequest="30" Source="palette"  toolkit:DockLayout.DockPosition="Right">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Theme_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding TitleText}"
+                    FontSize="22"
+                    VerticalOptions="Center"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation"
+                    HorizontalTextAlignment="Center"
+                    Margin="{OnPlatform Android='0, 0, 20, 0', iOS='0'}"
+                    TextColor="Black"/>
+            </toolkit:DockLayout>
+        </views:TitleViewFix>
+    </Shell.TitleView>
 
     <Grid IgnoreSafeArea="True">
         <Grid BackgroundColor="AliceBlue" RowDefinitions="*,*">
-            <Ellipse Fill="AliceBlue" WidthRequest="300" HeightRequest="300" Margin="0,0,300,10" Grid.Row="0"/>
-            <Ellipse Fill="AliceBlue" WidthRequest="300" HeightRequest="300" Margin="300,150,0,0" Grid.Row="1"/>
+            <Ellipse Fill="WhiteSmoke"  WidthRequest="300" HeightRequest="300" Margin="0,0,300,10" Grid.Row="0"/>
+            <Ellipse Fill="WhiteSmoke" WidthRequest="300" HeightRequest="300" Margin="300,150,0,0" Grid.Row="1"/>
         </Grid>
-
-        <ScrollView Orientation="Vertical">
-            <!--<StackLayout Orientation="Vertical"/>-->
-            <Label Text="StackLayout Orientation"
-    FontSize="22"
-    VerticalOptions="Center"
-    MaxLines="1"
-    LineBreakMode="TailTruncation"
-    HorizontalTextAlignment="Center"
-    Margin="{OnPlatform Android='0, 0, 20, 0', iOS='0'}"
-    TextColor="Black"/>
-        </ScrollView>
+        <CollectionView ItemTemplate="{StaticResource itemTemplate}" ItemsSource="{Binding Items}" />
     </Grid>
-
 </ContentPage>

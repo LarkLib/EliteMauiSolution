@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:WmsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Elite.LMS.Maui.ViewModels"
+             xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+             x:Class="Elite.LMS.Maui.Views.InitialInboundView"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
+    <views:WmsPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="WarehouseItemTemplate">
+                <StackLayout Padding="5">
+                    <Label Text="{Binding WarehouseName}"
+                       TextColor="Black"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ID：" TextColor="Gray" FontSize="Small"/>
+                        <Label Text="{Binding WarehouseID}"
+                           TextColor="Gray"
+                           FontSize="Small"/>
+                        <Label Text="   仓库编码：" TextColor="Gray" FontSize="Small"/>
+                        <Label Text="{Binding WarehouseCode}"
+                           TextColor="Gray"
+                           FontSize="Small" />
+                    </StackLayout>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="StationItemTemplate">
+                <StackLayout Padding="5">
+                    <Label Text="{Binding StationName}"
+                       TextColor="Black"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ID：" TextColor="Gray" FontSize="Small"/>
+                        <Label Text="{Binding StationID}"
+                           TextColor="Gray"
+                           FontSize="Small"/>
+                    </StackLayout>
+                </StackLayout>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </views:WmsPage.Resources>
+    <views:WmsPage.BindingContext>
+        <local:InitialInboundViewModel />
+    </views:WmsPage.BindingContext>
+    <VerticalStackLayout>
+        <VerticalStackLayout>
+            <dxe:ComboBoxEdit LabelText="仓库信息"
+                x:Name="comWarehouse"
+                ItemsSource="{Binding Warehouses}"
+                SelectionChangedCommand="{Binding WharehouseSelectionChangedCommand}"
+                SelectedItem="{Binding WarehouseSelectedItem}"
+                ItemTemplate="{StaticResource WarehouseItemTemplate}"
+                DisplayItemTemplate="{StaticResource WarehouseItemTemplate}"
+                VerticalOptions="Center"
+                Margin="16,0"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <dxe:ComboBoxEdit LabelText="站台信息"
+                SelectedItem="{Binding StationSelectedItem}"
+                ItemsSource="{Binding Stations}"
+                ClearIconCommand="{Binding Stations}"
+                ItemTemplate="{StaticResource StationItemTemplate}"
+                DisplayItemTemplate="{StaticResource StationItemTemplate}"
+                VerticalOptions="Center"
+                Margin="16,0"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Padding="5">
+            <dxe:TextEdit IsLabelFloating="False"
+              x:Name="txtMaterialCode"
+              Text="{Binding MaterialBarcode}"
+              VerticalOptions="Center"
+              LabelText="扫码信息"
+              LabelFontSize="20"
+              LabelColor="#404040"
+              FocusedLabelColor="#404040"
+              BorderColor="#a5a5a5"
+              FocusedBorderColor="#fe7c00"
+              Margin="16,0"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Padding="5">
+            <dxco:SimpleButton 
+                Command="{Binding SubmitCommand}"
+                Margin="16,10"
+                BorderThickness="2" 
+                BorderColor="Black" 
+                PressedBorderColor="DarkOrange" 
+                Text = "初始入库"/>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</views:WmsPage>

@@ -6,98 +6,121 @@ using Microsoft.Maui.Graphics;
 
 namespace Elite.LMS.Maui.ViewModels;
 
-public class ThemesViewModel : BaseViewModel {
+public class ThemesViewModel : BaseViewModel
+{
     public List<ColorModel> Items { get; set; }
     public bool IsCustomSource { get; set; }
 
     private bool isEnabled = true;
-    public bool IsEnabled {
+    public bool IsEnabled
+    {
         get => isEnabled;
         set => SetProperty(ref isEnabled, value);
     }
 
     private double red;
-    public double Red {
+    public double Red
+    {
         get => red;
         set => SetProperty(ref red, value, onChanged: (o, n) => UpdatePreviewColor(Red, Green, Blue));
     }
 
     private double green;
-    public double Green {
+    public double Green
+    {
         get => green;
         set => SetProperty(ref green, value, onChanged: (o, n) => UpdatePreviewColor(Red, Green, Blue));
     }
 
     private double blue;
-    public double Blue {
+    public double Blue
+    {
         get => blue;
         set => SetProperty(ref blue, value, onChanged: (o, n) => UpdatePreviewColor(Red, Green, Blue));
     }
 
     private Color previewColor;
-    public Color PreviewColor {
+    public Color PreviewColor
+    {
         get => previewColor;
         set => SetProperty(ref previewColor, value);
     }
 
     private string previewColorHex;
-    public string PreviewColorHex {
+    public string PreviewColorHex
+    {
         get => previewColorHex;
         set => SetProperty(ref previewColorHex, value);
     }
 
     private string previewColorName;
-    public string PreviewColorName {
+    public string PreviewColorName
+    {
         get => previewColorName;
         set => SetProperty(ref previewColorName, value);
     }
 
     private bool isLightTheme;
-    public bool IsLightTheme {
+    public bool IsLightTheme
+    {
         get => isLightTheme;
-        set {
-            if (isLightTheme != value && value) {
+        set
+        {
+            if (isLightTheme != value && value)
+            {
                 isLightTheme = true;
                 isDarkTheme = false;
                 isSystemTheme = false;
                 OnPropertyChanged(nameof(IsDarkTheme));
                 OnPropertyChanged(nameof(IsSystemTheme));
                 UpdateTheme();
-            } else {
+            }
+            else
+            {
                 OnPropertyChanged(nameof(IsLightTheme));
             }
         }
     }
 
     private bool isDarkTheme;
-    public bool IsDarkTheme {
+    public bool IsDarkTheme
+    {
         get => isDarkTheme;
-        set {
-            if (isDarkTheme != value && value) {
+        set
+        {
+            if (isDarkTheme != value && value)
+            {
                 isDarkTheme = true;
                 isLightTheme = false;
                 isSystemTheme = false;
                 OnPropertyChanged(nameof(IsLightTheme));
                 OnPropertyChanged(nameof(IsSystemTheme));
                 UpdateTheme();
-            } else {
+            }
+            else
+            {
                 OnPropertyChanged(nameof(IsDarkTheme));
             }
         }
     }
 
     private bool isSystemTheme = true;
-    public bool IsSystemTheme {
+    public bool IsSystemTheme
+    {
         get => isSystemTheme;
-        set {
-            if (isSystemTheme != value && value) {
+        set
+        {
+            if (isSystemTheme != value && value)
+            {
                 isSystemTheme = true;
                 isDarkTheme = false;
                 isLightTheme = false;
                 OnPropertyChanged(nameof(IsDarkTheme));
                 OnPropertyChanged(nameof(IsLightTheme));
                 UpdateTheme();
-            } else {
+            }
+            else
+            {
                 OnPropertyChanged(nameof(IsSystemTheme));
             }
         }
@@ -108,12 +131,14 @@ public class ThemesViewModel : BaseViewModel {
 #else
     private int selectedColorIndex;
 #endif
-    public int SelectedColorIndex {
+    public int SelectedColorIndex
+    {
         get => selectedColorIndex;
         set => SetProperty(ref selectedColorIndex, value);
     }
 
-    public ThemesViewModel() {
+    public ThemesViewModel()
+    {
         Items = new List<ColorModel>() {
 #if ANDROID
             new ColorModel(Colors.Black, "System Color", true),
@@ -131,7 +156,8 @@ public class ThemesViewModel : BaseViewModel {
         };
     }
 
-    public void ChangeColor(ColorModel colorModel) {
+    public void ChangeColor(ColorModel colorModel)
+    {
         if (colorModel == null)
             return;
 
@@ -141,7 +167,8 @@ public class ThemesViewModel : BaseViewModel {
         PreviewColorName = colorModel.DisplayName;
         IsEnabled = !colorModel.IsSystemColor;
         IsCustomSource = false;
-        if (colorModel.IsSystemColor) {
+        if (colorModel.IsSystemColor)
+        {
             ThemeManager.UseAndroidSystemColor = true;
             return;
         }
@@ -150,25 +177,29 @@ public class ThemesViewModel : BaseViewModel {
         ThemeManager.Theme = new Theme(colorModel.Color);
     }
 
-    private void UpdatePreviewColor(double red, double green, double blue) {
+    private void UpdatePreviewColor(double red, double green, double blue)
+    {
         PreviewColor = Color.FromRgb(red, green, blue);
         PreviewColorHex = PreviewColor.ToHex();
         IsCustomSource = true;
     }
-    private void UpdateTheme() {
+    private void UpdateTheme()
+    {
         Application.Current.UserAppTheme = IsSystemTheme
             ? AppTheme.Unspecified
             : IsLightTheme ? AppTheme.Light : AppTheme.Dark;
     }
 }
 
-public class ColorModel {
+public class ColorModel
+{
     public Color Color { get; set; }
     public string Name { get; set; }
     public string DisplayName { get; set; }
     public bool IsSystemColor { get; set; }
 
-    public ColorModel(Color color, string displayName, bool isSystemColor = false) {
+    public ColorModel(Color color, string displayName, bool isSystemColor = false)
+    {
         Color = color;
         DisplayName = displayName;
         IsSystemColor = isSystemColor;

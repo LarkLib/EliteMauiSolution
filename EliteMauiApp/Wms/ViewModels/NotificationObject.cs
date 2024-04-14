@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Elite.LMS.Maui.ViewModels {
-    public class NotificationObject : INotifyPropertyChanged {
-        protected bool SetProperty<T>(ref T backingStore, T value, Action onChanged = null, [CallerMemberName] string propertyName = "") {
+namespace Elite.LMS.Maui.ViewModels
+{
+    public class NotificationObject : INotifyPropertyChanged
+    {
+        protected bool SetProperty<T>(ref T backingStore, T value, Action onChanged = null, [CallerMemberName] string propertyName = "")
+        {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
 
@@ -15,7 +18,8 @@ namespace Elite.LMS.Maui.ViewModels {
             return true;
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value, Action<T, T> onChanged, [CallerMemberName] string propertyName = "") {
+        protected bool SetProperty<T>(ref T backingStore, T value, Action<T, T> onChanged, [CallerMemberName] string propertyName = "")
+        {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
             T oldValue = backingStore;
@@ -27,7 +31,8 @@ namespace Elite.LMS.Maui.ViewModels {
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") {
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion

@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WmsWebApiServiceCore",
+    "version": "1.0"
+  },
+  "paths": {
+    "/AGV/CallPalletTask": {
+      "post": {
+        "tags": [
+          "AGVTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AGVTaskInfo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AGVTaskInfo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AGVTaskInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AGVTaskResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AGVTaskResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AGVTaskResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AGV/GetStationByWarehouse": {
+      "post": {
+        "tags": [
+          "AGVTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StationQueryRequestBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StationQueryRequestBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StationQueryRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StationQueryResponseBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StationQueryResponseBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StationQueryResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/erpApi/stockTask": {
+      "post": {
+        "tags": [
+          "ErpIntegration"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErpStockTaskBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErpStockTaskBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErpStockTaskBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceResponceBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceResponceBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceResponceBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mauiApi/getMaterialByCode": {
+      "get": {
+        "tags": [
+          "Maui"
+        ],
+        "parameters": [
+          {
+            "name": "materialCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WcsNormalReport": {
+      "post": {
+        "tags": [
+          "WcsNormalReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WcsSignalReport": {
+      "post": {
+        "tags": [
+          "WcsSignalReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WcsSignalReport/QuerySignal": {
+      "post": {
+        "tags": [
+          "WcsSignalReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WcsReportDataBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AGVTaskInfo": {
+        "type": "object",
+        "properties": {
+          "taskNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "startLoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "startCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startHeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endLoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "endCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endHeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taskType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pallettype": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "tmestamp": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AGVTaskResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "errCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaseMaterial": {
+        "type": "object",
+        "properties": {
+          "f_ID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "f_MaterialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_Pattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_Spec": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_Level": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_LoadIndex": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_Board": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_Piece": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_MouldSeries": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "f_TrademarkID": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "f_ElectroplateFlag": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_MouldCategory": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "f_ReceiveCell": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "f_Remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_CreateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaseMaterialResponseBody": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseMaterial"
+            },
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErpStockTaskBody": {
+        "type": "object",
+        "properties": {
+          "pallectCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "palletCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "palletType": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskType": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "stationID": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseBody": {
+        "type": "object",
+        "properties": {
+          "reqNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceResponceBody": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StationBody": {
+        "type": "object",
+        "properties": {
+          "stationID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StationQueryRequestBody": {
+        "type": "object",
+        "properties": {
+          "warehouseID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stationType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StationQueryResponseBody": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StationBody"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WcsReportDataBody": {
+        "type": "object",
+        "properties": {
+          "f_TimeStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_ReportType": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_WmsTaskID": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_WcsTaskID": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_ErrorMsg": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_StationID": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_ReportVal": {
+            "type": "string",
+            "nullable": true
+          },
+          "f_ReportTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

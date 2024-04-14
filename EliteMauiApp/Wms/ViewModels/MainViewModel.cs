@@ -7,8 +7,10 @@ using Elite.LMS.Maui.Models;
 using Elite.LMS.Maui.Services;
 using Microsoft.Maui.Controls;
 
-namespace Elite.LMS.Maui.ViewModels {
-    public class MainViewModel : BaseViewModel {
+namespace Elite.LMS.Maui.ViewModels
+{
+    public class MainViewModel : BaseViewModel
+    {
         string version;
         public string ProductTitle => "LMS.Maui.Wms";
         public string Version => this.version;
@@ -16,7 +18,8 @@ namespace Elite.LMS.Maui.ViewModels {
         public string DocumentationUrl => "https://docs.devexpress.com/MAUI/";
         public string SourceCodeUrl => "https://github.com/DevExpress-Examples/maui-wms-app";
         public ICommand OpenWebCommand { get; }
-        void InitVersion() {
+        void InitVersion()
+        {
             Version assemblyVersion = Assembly.GetAssembly(GetType()).GetName().Version;
             this.version = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}";
         }
@@ -30,18 +33,21 @@ namespace Elite.LMS.Maui.ViewModels {
 
         readonly MauiUriOpener openService;
 
-        public MainViewModel() {
+        public MainViewModel()
+        {
             InitVersion();
             this.openService = new MauiUriOpener();
             OpenWebCommand = new Command<MenuItemDescription>((p) => this.openService.Open(p.Url));
-            MenuItems = new List<MenuItemDescription> {
+            MenuItems = new List<MenuItemDescription>
+            {
                 //new MenuItemDescription("Product Page", "productpage", OpenWebCommand, ProductUrl),
                 //new MenuItemDescription("Documentation", "documentation", OpenWebCommand, DocumentationUrl),
                 //new MenuItemDescription("Source Code", "sourcecode", OpenWebCommand, SourceCodeUrl)
             };
         }
 
-        List<WmsItem> GetItems() {
+        List<WmsItem> GetItems()
+        {
             List<WmsItem> result = new List<WmsItem>();
             result.AddRange(WmsGroupsData.WmsItems);
             return result;

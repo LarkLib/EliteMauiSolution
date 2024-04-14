@@ -63,8 +63,8 @@
             
 
             <Grid ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,32,0,16">
-                <dx:DXButton Content="Apply" ButtonType="Filled" Grid.Column="0" Clicked="Apply_Clicked"/>
-                <dx:DXButton Content="Cancel" ButtonType="Outlined" Grid.Column="1" Clicked="Cancel_Clicked"/>
+                <dx:DXButton Content="应用" ButtonType="Filled" Grid.Column="0" Clicked="Apply_Clicked"/>
+                <dx:DXButton Content="取消" ButtonType="Outlined" Grid.Column="1" Clicked="Cancel_Clicked"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

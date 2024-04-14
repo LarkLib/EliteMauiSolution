@@ -8,25 +8,7 @@
     FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <StackLayout BackgroundColor="Transparent">
-            <Grid ColumnDefinitions="48, *" Margin="4,24,16,16">
-                <Label TextColor="#77d065"
-                       FontSize="22"
-                       Text="Binding TitleText"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                       VerticalTextAlignment="Center"
-                       Grid.Column="1" />
-            </Grid>
-            <Label Margin="16,10"
-                   TextColor="#77d065"
-                   Text="Binding Description"
-                   FontSize="14"/>
-            <Label Margin="16,20,16,0"
-                   TextColor="#77d065"
-                   Text="Binding Version"
-                   FontSize="14"/>
-        </StackLayout>
+        <local:FlyoutHeader />
     </Shell.FlyoutHeader>
 
     <ShellContent FlyoutItemIsVisible="False"

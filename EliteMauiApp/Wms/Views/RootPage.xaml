@@ -7,35 +7,77 @@
     xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
     xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
     xmlns:local="clr-namespace:Elite.LMS.Maui"
+    xmlns:models="clr-namespace:Elite.LMS.Maui.Models"
     x:Class="Elite.LMS.Maui.AppShell"
     x:Name="appShell"
     FlyoutBehavior="Flyout"
+    FlyoutWidth="250"
+    FlyoutHeight="330"
+    Shell.TabBarIsVisible="False"
     FlyoutBackgroundColor="{dx:ThemeColor Surface}">
-    
+
     <Shell.FlyoutHeader>
         <StackLayout BackgroundColor="Transparent">
-            <Grid ColumnDefinitions="48, *" Margin="4,24,16,16">
-                <dx:DXImage Source="dx"
+            <Grid ColumnDefinitions="32, *,32" Margin="4,24,16,16">
+                <dx:DXImage Source="flyout_header"
                     TintColor="{dx:ThemeColor OnSurface}"
                     VerticalOptions="Center"
                     HeightRequest="24"/>
+
                 <Label TextColor="{dx:ThemeColor OnSurface}"
-                       FontSize="22"
+                       FontSize="16"
                        Text="{Binding TitleText}"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        VerticalTextAlignment="Center"
                        Grid.Column="1" />
             </Grid>
-            <Label Margin="16,10"
+            <dx:DXSeparator Orientation="Horizontal" Margin="16,2"/>
+            <dx:DXWrapLayout>
+                <Label Margin="16,10,0,10"
                    TextColor="{dx:ThemeColor OnSurface}"
-                   Text="{Binding Description}"
+                   Text="用户名："
                    FontSize="14"/>
-            <Label Margin="16,20,16,0"
+                <Label Margin="2,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="{Binding UserName, Source={x:Static models:LoginUser.Instance}}"
+                   FontSize="14"/>
+            </dx:DXWrapLayout>
+            <dx:DXWrapLayout>
+                <Label Margin="16,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="登录名："
+                   FontSize="14"/>
+                <Label Margin="2,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="{Binding UserCode, Source={x:Static models:LoginUser.Instance}}"
+                   FontSize="14"/>
+            </dx:DXWrapLayout>
+            <dx:DXWrapLayout>
+                <Label Margin="16,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="角色："
+                   FontSize="14"/>
+                <Label Margin="2,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="{Binding RoleName, Source={x:Static models:LoginUser.Instance}}"
+                   FontSize="14"/>
+            </dx:DXWrapLayout>
+            <dx:DXWrapLayout>
+                <Label Margin="16,10,0,10"
+                   TextColor="{dx:ThemeColor OnSurface}"
+                   Text="版本号："
+                   FontSize="14"/>
+                <Label Margin="2,10,0,10"
                    TextColor="{dx:ThemeColor OnSurface}"
                    Text="{Binding Version}"
                    FontSize="14"/>
+            </dx:DXWrapLayout>
             <dx:DXSeparator Orientation="Horizontal" Margin="16,20"/>
+            <dx:DXWrapLayout>
+                <dx:DXButton Margin="16,2" WidthRequest="90" Padding="5">注销</dx:DXButton>
+                <dx:DXButton Margin="5,2" WidthRequest="90" Padding="5">退出</dx:DXButton>
+            </dx:DXWrapLayout>
             <dxcv:DXCollectionView ItemsSource="{Binding MenuItems}">
                 <dxcv:DXCollectionView.ItemTemplate>
                     <DataTemplate>
@@ -47,8 +89,15 @@
             </dxcv:DXCollectionView>
         </StackLayout>
     </Shell.FlyoutHeader>
-
-    <ShellContent FlyoutItemIsVisible="False"
-        BindingContext="{Binding}"
-        ContentTemplate="{DataTemplate views:MainPage}"/>
+    <TabBar>
+        <Tab Title="login"  x:Name="login" Route="login">
+            <ShellContent ContentTemplate="{DataTemplate views:LoginView}" />
+        </Tab>
+        <Tab Title="main" x:Name="main" Route="main" IsVisible="True">
+            <ShellContent 
+            FlyoutItemIsVisible="False"
+            BindingContext="{Binding}"
+            ContentTemplate="{DataTemplate views:MainPage}"/>
+        </Tab>
+    </TabBar>
 </Shell>

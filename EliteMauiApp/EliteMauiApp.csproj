@@ -2,6 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="EliteMauiApp.projitem" />
   <PropertyGroup>
+	<WarningsNotAsErrors>$(WarningsNotAsErrors);XC0022</WarningsNotAsErrors>
     <DefineConstants>$(DefineConstants);PaidWmsModules</DefineConstants>
     <NoWarn>$(NoWarn);IL2105</NoWarn>
     <TargetFrameworks>net8.0-android</TargetFrameworks>
@@ -12,19 +13,68 @@
     <AndroidPackageFormat>apk</AndroidPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <AndroidResource Remove="Platforms\Android\WmsModules\**" />
+	<AndroidResource Remove="Platforms\Android\WmsModules\**" />
+	<AndroidResource Remove="Resources\Images\Avatars\**" />
+	<AndroidResource Remove="Resources\Images\Controls\**" />
+	<AndroidResource Remove="Resources\Images\Editors\**" />
+	<AndroidResource Remove="Resources\Images\Houses\**" />
+	<AndroidResource Remove="Resources\Images\Shimmer\**" />
+	<AndroidResource Remove="Resources\Images\Special\**" />
     <AndroidResource Remove="WmsModules\**" />
+    <AndroidResource Remove="Wms\Images\**" />
     <Compile Remove="Platforms\Android\WmsModules\**" />
+    <Compile Remove="Resources\Images\Avatars\**" />
+    <Compile Remove="Resources\Images\Controls\**" />
+    <Compile Remove="Resources\Images\Editors\**" />
+    <Compile Remove="Resources\Images\Houses\**" />
+    <Compile Remove="Resources\Images\Shimmer\**" />
+    <Compile Remove="Resources\Images\Special\**" />
     <Compile Remove="WmsModules\**" />
+    <Compile Remove="Wms\Images\**" />
     <EmbeddedResource Remove="Platforms\Android\WmsModules\**" />
+    <EmbeddedResource Remove="Resources\Images\Avatars\**" />
+    <EmbeddedResource Remove="Resources\Images\Controls\**" />
+    <EmbeddedResource Remove="Resources\Images\Editors\**" />
+    <EmbeddedResource Remove="Resources\Images\Houses\**" />
+    <EmbeddedResource Remove="Resources\Images\Shimmer\**" />
+    <EmbeddedResource Remove="Resources\Images\Special\**" />
     <EmbeddedResource Remove="WmsModules\**" />
+    <EmbeddedResource Remove="Wms\Images\**" />
     <MauiCss Remove="Platforms\Android\WmsModules\**" />
+    <MauiCss Remove="Resources\Images\Avatars\**" />
+    <MauiCss Remove="Resources\Images\Controls\**" />
+    <MauiCss Remove="Resources\Images\Editors\**" />
+    <MauiCss Remove="Resources\Images\Houses\**" />
+    <MauiCss Remove="Resources\Images\Shimmer\**" />
+    <MauiCss Remove="Resources\Images\Special\**" />
     <MauiCss Remove="WmsModules\**" />
+    <MauiCss Remove="Wms\Images\**" />
+    <MauiImage Remove="Resources\Images\Avatars\**" />
+    <MauiImage Remove="Resources\Images\Controls\**" />
+    <MauiImage Remove="Resources\Images\Editors\**" />
+    <MauiImage Remove="Resources\Images\Houses\**" />
+    <MauiImage Remove="Resources\Images\Shimmer\**" />
+    <MauiImage Remove="Resources\Images\Special\**" />
     <MauiImage Remove="WmsModules\**" />
+    <MauiImage Remove="Wms\Images\**" />
     <MauiXaml Remove="Platforms\Android\WmsModules\**" />
+    <MauiXaml Remove="Resources\Images\Avatars\**" />
+    <MauiXaml Remove="Resources\Images\Controls\**" />
+    <MauiXaml Remove="Resources\Images\Editors\**" />
+    <MauiXaml Remove="Resources\Images\Houses\**" />
+    <MauiXaml Remove="Resources\Images\Shimmer\**" />
+    <MauiXaml Remove="Resources\Images\Special\**" />
     <MauiXaml Remove="WmsModules\**" />
+    <MauiXaml Remove="Wms\Images\**" />
     <None Remove="Platforms\Android\WmsModules\**" />
+    <None Remove="Resources\Images\Avatars\**" />
+    <None Remove="Resources\Images\Controls\**" />
+    <None Remove="Resources\Images\Editors\**" />
+    <None Remove="Resources\Images\Houses\**" />
+    <None Remove="Resources\Images\Shimmer\**" />
+    <None Remove="Resources\Images\Special\**" />
     <None Remove="WmsModules\**" />
+    <None Remove="Wms\Images\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Wms\Data\ChartsData.cs" />
@@ -39,42 +89,147 @@
     <Compile Remove="Wms\Data\SchedulerData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="EliteMauiApp.projitem" />
     <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+    <None Remove="Resources\Images\delete_dark.svg" />
+    <None Remove="Resources\Images\Wms\close_circle.svg" />
+    <None Remove="Resources\Images\Wms\editorsname.svg" />
+    <None Remove="Resources\Images\Wms\editorspassword.svg" />
+    <None Remove="Resources\Images\Wms\flyout_header.svg" />
+    <None Remove="Resources\Images\Wms\grouping.svg" />
+    <None Remove="Resources\Images\Wms\initial_inbound.svg" />
+    <None Remove="Resources\Images\Wms\login_image.jpg" />
+    <None Remove="Resources\Images\Wms\manually_issue_circle.svg" />
+    <None Remove="Resources\Images\Wms\manually_issue_rect.svg" />
+    <None Remove="Resources\Images\Wms\material_return.svg" />
+    <None Remove="Resources\Images\Wms\palette.svg" />
     <Compile Include="WmsModules\Models\IBarcodeReceiver.cs" />
     <Compile Include="WmsModules\Services\swaggerClient.cs" />
     <Compile Include="WmsModules\Services\WmsService.cs" />
-    <Compile Include="WmsModules\ViewModels\Matrial\InboundViewModel.cs" />
-    <Compile Include="WmsModules\Views\Matrial\InboundView.xaml.cs">
-      <DependentUpon>InboundView.xaml</DependentUpon>
+    <Compile Include="WmsModules\ModelUtils.cs" />
+    <Compile Include="WmsModules\ViewModels\ColorConverter.cs" />
+    <Compile Include="WmsModules\ViewModels\MaterialGroupBoxExecuteViewModel.cs" />
+    <Compile Include="WmsModules\ViewModels\MaterialGroupBoxViewModel.cs" />
+    <Compile Include="WmsModules\ViewModels\ManuallyIssueViewModel.cs" />
+    <Compile Include="WmsModules\ViewModels\LoginViewModel.cs" />
+    <Compile Include="WmsModules\ViewModels\MaterialReturnViewModel.cs" />
+    <Compile Include="WmsModules\ViewModels\InitialInboundViewModel.cs" />
+    <Compile Include="WmsModules\Views\MaterialGroupBoxExecuteView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MaterialGroupBoxExecuteView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WmsModules\Views\SelectableItem.cs" />
+    <Compile Include="WmsModules\Views\MaterialGroupBoxView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MaterialGroupBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\ManuallyIssuView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ManuallyIssuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\MaterialReturnView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MaterialReturnView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\NewContent1.cs" />
+    <Compile Include="WmsModules\Views\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\TempView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>TempView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\TestView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WmsModules\Views\InitialInboundView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>InitialInboundView.xaml</DependentUpon>
+    </Compile>
+    <MauiImage Include="Resources\Images\Wms\close_circle.svg" />
+    <MauiImage Include="Resources\Images\Wms\flyout_header.svg" />
+    <MauiImage Include="Resources\Images\Wms\editorsname.svg" />
+    <MauiImage Include="Resources\Images\Wms\editorspassword.svg" />
+    <MauiImage Include="Resources\Images\Wms\grouping.svg" />
+    <MauiImage Include="Resources\Images\Wms\manually_issue_circle.svg" />
+    <MauiImage Include="Resources\Images\Wms\manually_issue_rect.svg" />
+    <MauiImage Include="Resources\Images\Wms\initial_inbound.svg" />
+    <MauiImage Include="Resources\Images\Wms\login_image.jpg" />
+    <MauiImage Include="Resources\Images\Wms\material_return.svg" />
+    <MauiImage Include="Resources\Images\Wms\palette.svg" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <!--<PackageReference Include="DevExpress.Document.Processor" Version="23.2.3" />
     <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="23.2.3" />
     <PackageReference Include="DevExpress.Pdf.Core" Version="23.2.3" />
     <PackageReference Include="DevExpress.Printing.Core" Version="23.2.3" />
     <PackageReference Include="DevExpress.RichEdit.Export" Version="23.2.3" />-->
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />
-	<PackageReference Include="DevExpress.Drawing" Version="23.2.3" />
+    <!--<PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.3" />-->
 	<PackageReference Include="DevExpress.Maui.Core" Version="23.2.3" />
     <PackageReference Include="DevExpress.Maui.Controls" Version="23.2.3" />
-    <PackageReference Include="DevExpress.Maui.DataGrid" Version="23.2.3" />
+    <!--<PackageReference Include="DevExpress.Maui.DataGrid" Version="23.2.3" />-->
     <!--<PackageReference Include="DevExpress.Maui.Charts" Version="23.2.3" />-->
     <PackageReference Include="DevExpress.Maui.CollectionView" Version="23.2.3" />
     <PackageReference Include="DevExpress.Maui.Editors" Version="23.2.3" />
-    <PackageReference Include="DevExpress.Maui.Gauges" Version="23.2.3" />
+    <!--<PackageReference Include="DevExpress.Maui.Gauges" Version="23.2.3" />-->
     <!--<PackageReference Include="DevExpress.Maui.Scheduler" Version="23.2.3" />
     <PackageReference Include="DevExpress.Maui.DataGrid.Export" Version="23.2.3" />
     <PackageReference Include="DevExpress.Maui.HtmlEditor" Version="23.2.3" />
     <PackageReference Include="DevExpress.Maui.Pdf" Version="23.2.3" />-->
 
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.2">
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.3" />
+	<PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.7">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	
+    <!--Move from projitem-->
+	<PackageReference Include="DevExpress.Data" Version="23.2.3" />
+	<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.2" />
+	<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.1" />
+	<TrimmableAssembly Include="DevExpress.Data.v23.2" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.14" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+ 	<PackageReference Condition="$(DXPlatform) == 'Android'" Include="SkiaSharp.NativeAssets.Android" Version="2.88.7" />
+	<PackageReference Include="SkiaSharp" Version="2.88.7" />
+	<PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.7" />
+	<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.7" />  
+    <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
   </ItemGroup>
   <ItemGroup>
-    <MauiXaml Include="WmsModules\Views\Matrial\InboundView.xaml">
+    <MauiXaml Include="WmsModules\Views\MaterialGroupBoxExecuteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\MaterialGroupBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\ManuallyIssuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\MaterialReturnView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\TempView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\TestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Include="WmsModules\Views\InitialInboundView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

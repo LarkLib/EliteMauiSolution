@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views:WmsPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+    xmlns:wms="clr-namespace:Elite.LMS.Maui.Wms"
+    xmlns:local="clr-namespace:Elite.LMS.Maui.ViewModels" 
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+    xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+    Title="登录界面"
+    Shell.FlyoutBehavior="Disabled"
+    x:Class="Elite.LMS.Maui.Views.LoginView">
+    <views:WmsPage.BindingContext>
+        <local:LoginViewModel />
+    </views:WmsPage.BindingContext>
+    <wms:ScrollViewFix Padding="{OnIdiom Phone=16, Tablet='92,36'}" BackgroundColor="#11264f">
+        <dx:DXDockLayout StretchLastItem="False" VerticalSpacing="4">
+            <dx:DXImage 
+                HeightRequest="250" 
+                WidthRequest="800" 
+                dx:DXDockLayout.Dock="Top"
+                Source="login_image" />
+            <dxe:TextEdit
+                dx:DXDockLayout.Dock="Top"
+                Text="{Binding UserCode}"
+                TextColor="White"
+                TextFontSize="24"
+                StartIcon="editorsname"
+                LabelText="用户名"
+                LabelColor="#9b95c9"
+                AutofillContentType="Username"
+                HelpText="*必填项"
+                HelpTextColor="#f26522"
+                ErrorText="Login is required"/>
+            <dxe:PasswordEdit
+                dx:DXDockLayout.Dock="Top"
+                Text="{Binding Password}"
+                TextColor="White"
+                TextFontSize="24"
+                StartIcon="editorspassword"
+                LabelText="密码"
+                LabelColor="#9b95c9"
+                AutofillContentType="Password"
+                HelpText="*必填项"
+                HelpTextColor="#f26522"
+                ErrorText="请输入正确的密码."/>
+            <!--<dxe:ComboBoxEdit
+                dx:DXDockLayout.Dock="Top"
+                LabelText="Box Mode"
+                ReserveBottomTextLine="True"/>-->
+            <dxco:SimpleButton dx:DXDockLayout.Dock="Top" Text="登  录" Command="{Binding SubmitCommand}" FontSize="16" Margin="0,16,0,0" BackgroundColor="#1b315e" />
+            <dxco:SimpleButton dx:DXDockLayout.Dock="Top" Text="取  消" Command="{Binding CloseCommand}"  FontSize="16" Margin="0,8,0,0" BackgroundColor="#1b315e"/>
+        </dx:DXDockLayout>
+    </wms:ScrollViewFix>
+</views:WmsPage>

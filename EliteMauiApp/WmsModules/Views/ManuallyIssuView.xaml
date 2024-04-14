@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:WmsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Elite.LMS.Maui.ViewModels"
+             xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+             x:Class="Elite.LMS.Maui.Views.ManuallyIssueView"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             x:Name="IssuePlanPage">
+    <views:WmsPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="itemBaseTemplate">
+                <Grid Padding="10, 8, 18, 7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse IsVisible="False" 
+                             WidthRequest="5" 
+                             Fill="{dx:ThemeColor Secondary}" 
+                             HeightRequest="5" 
+                             VerticalOptions="Center" 
+                             HorizontalOptions="Center" 
+                             Grid.RowSpan="2"
+                             Margin="0,0,0,0">
+                        <Ellipse.Triggers>
+                            <DataTrigger Binding="{TemplateBinding Path=IsSelected}" Value="True" TargetType="{x:Type Ellipse}">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Ellipse.Triggers>
+                    </Ellipse>
+                    <dx:DXStackLayout Grid.Column="1"
+                             Padding="18,1,18,7"
+                             Orientation="Vertical">
+                        <dx:DXWrapLayout>
+                            <Label Text="任务号：" Margin="0,2" TextColor="Black" FontAttributes="Bold"/>
+                            <Label Text="{Binding RemotePlanCode}" Margin="0,2" TextColor="Black" FontAttributes="Bold"/>
+                            <Label Text="{Binding PlanTypeName}" Margin="10,2" TextColor="Blue" BackgroundColor="#fdb933"/>
+                        </dx:DXWrapLayout>
+                        <dx:DXWrapLayout>
+                            <Label Text="创建时间："                Margin="0,2" TextColor="#55575c"/>
+                            <Label Text="{Binding CreateTime}"    Margin="0,2" TextColor="#959aa0"/>
+                        </dx:DXWrapLayout>
+                        <dx:DXWrapLayout>
+                            <Label Text="仓库名称：" Margin="0,2" TextColor="#55575c"/>
+                            <Label Text="{Binding FromWarehouse}" Margin="0,2" TextColor="#959aa0"/>
+                        </dx:DXWrapLayout>
+                        <dx:DXWrapLayout>
+                            <Label Text="要料机台：" Margin="0,2" TextColor="#55575c"/>
+                            <Label Text="{Binding StationName}" Margin="0,2" TextColor="#959aa0"/>
+                        </dx:DXWrapLayout>
+                    </dx:DXStackLayout>
+                    <dx:DXStackLayout Grid.Column="2">
+                        <Label Text="{Binding PlanStatusName}" 
+                               HeightRequest="16"
+                               Margin="0,2" TextColor="Blue" 
+                               BackgroundColor="{Binding PlanStatusName, Converter={StaticResource StatusColorConverter}}"/>
+                    </dx:DXStackLayout>
+                </Grid>
+            </ControlTemplate>
+            <local:ColorConverter x:Key="StatusColorConverter" />
+        </ResourceDictionary>
+    </views:WmsPage.Resources>
+    <!--<views:WmsPage.BindingContext>
+        <local:ManuallyIssueViewModel />
+    </views:WmsPage.BindingContext>-->
+    <dxcv:DXCollectionView ItemsSource="{Binding IssuePlans}"
+                           SelectionMode="Single"
+                           IsPullToRefreshEnabled="True"
+                           IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                           PullToRefreshCommand="{Binding PullToRefreshCommand}"
+                           IndicatorColor="Lime">
+        <!--Define the item template.-->
+        <dxcv:DXCollectionView.ItemTemplate>
+            <DataTemplate>
+                <views:SelectableItem IsSelected="False" ControlTemplate="{StaticResource itemBaseTemplate}"/>
+            </DataTemplate>
+        </dxcv:DXCollectionView.ItemTemplate>
+        <dxcv:DXCollectionView.SelectedItemTemplate>
+            <DataTemplate>
+                <dx:DXBorder Margin="10, 1"
+                             Padding="0"
+                             BorderColor="Orange"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
+                             BorderThickness="2"
+                             IsVisible="True"
+                             CornerRadius="10">
+                    <dx:DXStackLayout>
+                        <views:SelectableItem IsSelected="True" ControlTemplate="{StaticResource itemBaseTemplate}"/>
+                        <dx:DXWrapLayout Margin="50,0,0,0">
+                            <dxco:SimpleButton 
+                                HeightRequest="20"
+                                WidthRequest="100"
+                                Padding="0"
+                                Command="{Binding  BindingContext.CheckPlanCommand, Source={x:Reference Name=IssuePlanPage}}"
+                                Margin="5,2"
+                                BorderThickness="2" 
+                                BorderColor="Black" 
+                                PressedBorderColor="DarkOrange" 
+                                FontSize="12"
+                                Text = "校验"/>
+                            <dxco:SimpleButton 
+                                HeightRequest="25"
+                                WidthRequest="100"
+                                Padding="0"
+                                Command="{Binding  BindingContext.ExecutePlanCommand, Source={x:Reference Name=IssuePlanPage}}"
+                                CommandParameter="{Binding LocalPlanCode}"
+                                Margin="5,2"
+                                BorderThickness="2" 
+                                BorderColor="Black" 
+                                PressedBorderColor="DarkOrange" 
+                                FontSize="12"
+                                Text = "执行"/>
+                        </dx:DXWrapLayout>
+                    </dx:DXStackLayout>
+                </dx:DXBorder>
+            </DataTemplate>
+        </dxcv:DXCollectionView.SelectedItemTemplate>
+        <!--Specify margins.-->
+        <dxcv:DXCollectionView.Margin>
+            <OnIdiom x:TypeArguments="Thickness" Phone="10,0,10,0" Tablet="71,0,0,0"/>
+        </dxcv:DXCollectionView.Margin>
+    </dxcv:DXCollectionView>
+</views:WmsPage>

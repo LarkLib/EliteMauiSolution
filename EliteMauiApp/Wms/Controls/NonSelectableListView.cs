@@ -1,41 +1,51 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
 
-namespace Elite.LMS.Maui.Wms {
-    public class NonSelectableListView : ListView {
+namespace Elite.LMS.Maui.Wms
+{
+    public class NonSelectableListView : ListView
+    {
 
         public static readonly BindableProperty ScrollsToTopProperty = BindableProperty.Create(nameof(ScrollsToTop), typeof(bool), typeof(NonSelectableListView), defaultValue: true);
 
-        public NonSelectableListView() : base(GetDefaultCachingStrategy()) {
+        public NonSelectableListView() : base(GetDefaultCachingStrategy())
+        {
         }
         public NonSelectableListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy) { }
 
-        static ListViewCachingStrategy GetDefaultCachingStrategy() {
+        static ListViewCachingStrategy GetDefaultCachingStrategy()
+        {
             if (DeviceInfo.Platform == DevicePlatform.iOS)
                 return ListViewCachingStrategy.RecycleElement;
             return ListViewCachingStrategy.RetainElement;
         }
 
-        public bool ScrollsToTop {
+        public bool ScrollsToTop
+        {
             get => (bool)GetValue(ScrollsToTopProperty);
             set => SetValue(ScrollsToTopProperty, value);
         }
 
     }
 
-    public class NonSelectableViewCell : ViewCell {
-        public NonSelectableViewCell() {
+    public class NonSelectableViewCell : ViewCell
+    {
+        public NonSelectableViewCell()
+        {
         }
     }
 
-    public class BouncelessCollectionView : CollectionView {
+    public class BouncelessCollectionView : CollectionView
+    {
 
         public static readonly BindableProperty ScrollsToTopProperty = BindableProperty.Create(nameof(ScrollsToTop), typeof(bool), typeof(NonSelectableListView), defaultValue: true);
 
-        public BouncelessCollectionView() : base() {
+        public BouncelessCollectionView() : base()
+        {
         }
 
-        public bool ScrollsToTop {
+        public bool ScrollsToTop
+        {
             get => (bool)GetValue(ScrollsToTopProperty);
             set => SetValue(ScrollsToTopProperty, value);
         }

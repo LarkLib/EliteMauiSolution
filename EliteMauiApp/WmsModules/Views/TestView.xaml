@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dxco:DXPopup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Elite.LMS.Maui.ViewModels"
+             x:Class="Elite.LMS.Maui.Wms.Views.TestView"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors">
+    <VerticalStackLayout>
+        <VerticalStackLayout Padding="5">
+            <dxco:DXPopup x:Name="popup">
+                <StackLayout>
+                    <Label Text="This is the DevExpress .NET MAUI Popup component."
+               Margin="10, 10"/>
+                </StackLayout>
+            </dxco:DXPopup>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</dxco:DXPopup>

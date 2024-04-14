@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:WmsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Elite.LMS.Maui.ViewModels"
+             xmlns:views="clr-namespace:Elite.LMS.Maui.Views"
+             x:Class="Elite.LMS.Maui.Views.MaterialGroupBoxExecuteView"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             x:Name="groupBoxExecuteView"
+             Title="组箱扫码">
+    <views:WmsPage.Resources>
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="StatusColorConverter" />
+            <Style TargetType="dxcv:SwipeItem">
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style x:Key="SeparatorStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DarkGray"/>
+                <Setter Property="HeightRequest" Value="1"/>
+            </Style>
+        </ResourceDictionary>
+    </views:WmsPage.Resources>
+    <!--<views:WmsPage.BindingContext>
+        <local:MaterialGroupBoxViewModel />
+    </views:WmsPage.BindingContext>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <dx:DXStackLayout Grid.Row="0">
+            <dxco:SimpleButton 
+                Clicked="SimpleButton_Clicked"
+                HeightRequest="25"
+                WidthRequest="100"
+                Padding="0"
+                Margin="5,2"
+                BorderThickness="2" 
+                BorderColor="Black" 
+                PressedBorderColor="DarkOrange" 
+                FontSize="12"
+                Text = "添加随机条码"/>
+        </dx:DXStackLayout>
+        <dx:DXStackLayout Grid.Row="1">
+            <dx:DXWrapLayout>
+                <Label Text="任务号：" Margin="18,1,18,7" TextColor="Black" FontAttributes="Bold"/>
+                <Label Text="{Binding LocalpLocalPlanCode}" Margin="0,2" TextColor="Black" FontAttributes="Bold"/>
+            </dx:DXWrapLayout>
+            <dxcv:DXCollectionView x:Name="collectionView" ItemsSource="{Binding Barcodes}">
+                <dxcv:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <dxcv:SwipeContainer>
+                            <dxcv:SwipeContainer.ItemView>
+                                <dx:DXWrapLayout Margin="10, 8, 18, 7">
+                                    <Label Text="物料条码：" Margin="0,2" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Text="{Binding}" Margin="0,2" TextColor="Black" FontAttributes="Bold"/>
+                                </dx:DXWrapLayout>
+                            </dxcv:SwipeContainer.ItemView>
+
+                            <!--<dxcv:SwipeContainer.StartSwipeItems>
+                                <dxcv:SwipeItem Caption="{Binding ActionText}"
+                                        BackgroundColor="Green"
+                                        Image="{Binding ActionIcon}"
+                                        Command="{Binding ChangeStateCommand}"/>
+                            </dxcv:SwipeContainer.StartSwipeItems>-->
+
+                            <dxcv:SwipeContainer.EndSwipeItems>
+                                <dxcv:SwipeItem Caption="Delete"
+                                        BackgroundColor="Red"
+                                        Image="delete_dark"
+                                        Command="{Binding  BindingContext.EndSwipeCommand, Source={x:Reference Name=groupBoxExecuteView}}" 
+                                        CommandParameter="{Binding}"        />
+                            </dxcv:SwipeContainer.EndSwipeItems>
+                        </dxcv:SwipeContainer>
+                    </DataTemplate>
+                </dxcv:DXCollectionView.ItemTemplate>
+            </dxcv:DXCollectionView>
+        </dx:DXStackLayout>
+        <dx:DXStackLayout Grid.Row="2">
+            <dxco:SimpleButton 
+                HeightRequest="25"
+                WidthRequest="100"
+                Padding="0"
+                Command="{Binding BoxingPlanCommand}"
+                Margin="5,2"
+                BorderThickness="2" 
+                BorderColor="Black" 
+                PressedBorderColor="DarkOrange" 
+                FontSize="12"
+                Text = "组箱"/>
+        </dx:DXStackLayout>
+    </Grid>
+</views:WmsPage>

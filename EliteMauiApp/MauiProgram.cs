@@ -4,7 +4,6 @@ using Microsoft.Maui.Controls;
 #if PaidWmsModules
 using SkiaSharp.Views.Maui.Controls.Hosting;
 #endif
-using CommunityToolkit.Maui;
 using DevExpress.Maui;
 using DevExpress.Maui.Core;
 
@@ -19,7 +18,6 @@ namespace Elite.LMS.Maui {
             builder
                 .UseMauiApp<App>()
                 .UseDevExpress()
-                .UseMauiCommunityToolkit()
 #if DEBUG
 
 #endif
@@ -33,7 +31,7 @@ namespace Elite.LMS.Maui {
             DevExpress.Maui.CollectionView.Initializer.Init();
             DevExpress.Maui.Controls.Initializer.Init();
             DevExpress.Maui.Editors.Initializer.Init();
-            DevExpress.Maui.DataGrid.Initializer.Init();
+            //DevExpress.Maui.DataGrid.Initializer.Init();
             //DevExpress.Maui.Scheduler.Initializer.Init();
             return builder.Build();
         }

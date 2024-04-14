@@ -1,624 +1,2376 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
-    "title": "WmsWebApiService",
-    "version": "1.0"
+    "version": "v1",
+    "title": "Api服务在线说明"
   },
+  "host": "192.168.2.35:8050",
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/AGV/CallPalletTask": {
+    "/api/AgvService/SendTaskToAgv": {
       "post": {
         "tags": [
-          "AGVTask"
+          "AgvService"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AGVTaskInfo"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AGVTaskInfo"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AGVTaskInfo"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AGVTaskResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AGVTaskResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AGVTaskResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/erpApi/stockTask": {
-      "post": {
-        "tags": [
-          "ErpIntegration"
+        "summary": "发送AGV任务服务接口",
+        "operationId": "AgvService_SendTaskToAgv",
+        "consumes": [
+          "application/json",
+          "text/json"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErpStockTaskBody"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErpStockTaskBody"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErpStockTaskBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResponceBody"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResponceBody"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceResponceBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mauiApi/getMaterialByCode": {
-      "get": {
-        "tags": [
-          "Maui"
+        "produces": [
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
-            "name": "materialCode",
-            "in": "query",
+            "name": "agvTasks",
+            "in": "body",
+            "description": "",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgvTaskBody"
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseMaterialResponseBody"
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
             }
           }
         }
       }
     },
-    "/WcsNormalReport": {
+    "/api/AgvService/AgvReport": {
       "post": {
         "tags": [
-          "WcsNormalReport"
+          "AgvService"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
+        "summary": "AGV上报任务状态服务接口",
+        "operationId": "AgvService_AgvReport",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgvReportBody"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgvResponseBody"
             }
           }
         }
       }
     },
-    "/WcsSignalReport": {
+    "/api/FactoryWmsService/PrepareProductReq": {
       "post": {
         "tags": [
-          "WcsSignalReport"
+          "FactoryWmsService"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
+        "summary": "厂级Wms成品备货申请",
+        "operationId": "FactoryWmsService_PrepareProductReq",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductPrepareRequestBody"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
             }
           }
         }
       }
     },
-    "/WcsSignalReport/QuerySignal": {
+    "/api/FactoryWmsService/ReportProductOutbound": {
       "post": {
         "tags": [
-          "WcsSignalReport"
+          "FactoryWmsService"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WcsReportDataBody"
-              }
+        "summary": "成品出库信息上报",
+        "operationId": "FactoryWmsService_ReportProductOutbound",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportProductOutboundBody"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
             }
           }
         }
       }
     },
-    "/WeatherForecast": {
-      "get": {
+    "/api/FactoryWmsService/ProductShelvesOrOutReq": {
+      "post": {
         "tags": [
-          "WeatherForecast"
+          "FactoryWmsService"
         ],
-        "operationId": "GetWeatherForecast",
+        "summary": "成品上架申请",
+        "operationId": "FactoryWmsService_ProductShelvesOrOutReq",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductMoveOrOutReqBody"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/LiftWmsService/SyncInventory": {
+      "post": {
+        "tags": [
+          "LiftWmsService"
+        ],
+        "summary": "库存同步服务接口",
+        "operationId": "LiftWmsService_SyncInventory",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftSyncInventoryBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/LiftWmsService/MaterialQuery": {
+      "post": {
+        "tags": [
+          "LiftWmsService"
+        ],
+        "summary": "获取物料基础信息服务接口",
+        "operationId": "LiftWmsService_MaterialQuery",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaterialQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/MaterialReqOut": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES请求原材料出库-自动出库",
+        "operationId": "MesService_MaterialReqOut",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MesRequestOutboundTaskBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/MaterialReqManuallyOut": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES请求原材料出库-人工出库",
+        "operationId": "MesService_MaterialReqManuallyOut",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MesRequestManuallyOutboundBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/IssuePlanQuery": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES请求原材料出库计划查询",
+        "operationId": "MesService_IssuePlanQuery",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "planCode",
+            "in": "query",
+            "description": "要查询的计划号",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MesIssuePlanQuery"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/MaterialReqReturn": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES请求原材料返库",
+        "operationId": "MesService_MaterialReqReturn",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MesRequestReturnTaskBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/StationRotation": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES发送机台旋转通知",
+        "operationId": "MesService_StationRotation",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MesStationRotationReportBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/ChangeInventory": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES发送机台旋转通知",
+        "operationId": "MesService_ChangeInventory",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MesRequestChangeInventoryBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/MesService/FinishedProductReqIn": {
+      "post": {
+        "tags": [
+          "MesService"
+        ],
+        "summary": "MES请求成品完工入库",
+        "operationId": "MesService_FinishedProductReqIn",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/LoginUserValidation": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "登陆用户校验申请",
+        "operationId": "PdaService_LoginUserValidation",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqBody",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserValidaitonRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserValidationResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetWarehouse": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取仓库信息",
+        "operationId": "PdaService_GetWarehouse",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WarehouseQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetStationByWarehouse": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取仓库站台信息",
+        "operationId": "PdaService_GetStationByWarehouse",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StationQueryRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StationQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetTerminalIssuePlan": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取全部处于等待或执行状态的端子、模具生产领料主计划信息",
+        "operationId": "PdaService_GetTerminalIssuePlan",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetPlanList": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取给定计划编号的明细信息",
+        "operationId": "PdaService_GetPlanList",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "planCode",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanListQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/PlanSeqQuery": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取给定计划编号分配的物料清单信息",
+        "operationId": "PdaService_PlanSeqQuery",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "planCode",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanSeqQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/ManuallyPlanSeqQuery": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取给定计划编号的手工领料单分配的物料清单信息",
+        "operationId": "PdaService_ManuallyPlanSeqQuery",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "planCode",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanSeqQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetManuallyIssuePlan": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取全部处于等待或执行状态的手工领料主计划信息",
+        "operationId": "PdaService_GetManuallyIssuePlan",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "warehouse",
+            "in": "query",
+            "description": "仓库信息；1：导线库  2：端子库",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/MaterialInbound": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "原材料初始入库",
+        "operationId": "PdaService_MaterialInbound",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaterialInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/MaterialCheckInbound": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "原材料盘点入库",
+        "operationId": "PdaService_MaterialCheckInbound",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaterialInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/MaterialReturnInbound": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "原材料退料入库",
+        "operationId": "PdaService_MaterialReturnInbound",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaterialInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/ProcessEmptyMaterial": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "空轴处理",
+        "operationId": "PdaService_ProcessEmptyMaterial",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaterialInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/ExecuteManuallyIssuePlan": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "执行手工领料计划",
+        "operationId": "PdaService_ExecuteManuallyIssuePlan",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlanExecuteRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/ManuallyIssueMaterialCheck": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "手工领料出库物料校验",
+        "operationId": "PdaService_ManuallyIssueMaterialCheck",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "barcode",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/ManuallyExecutePlan": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "手工执行端子库和端子模具库生产领料计划",
+        "operationId": "PdaService_ManuallyExecutePlan",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlanExecuteRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/MaterialGroupBox": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "原料组箱操作",
+        "operationId": "PdaService_MaterialGroupBox",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaterialGroupBoxRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetBoxInfo": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取载具信息",
+        "operationId": "PdaService_GetBoxInfo",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BoxQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/GetSortStation": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "获取发货库拣选位信息",
+        "operationId": "PdaService_GetSortStation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StationQueryResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService/BoxInbound": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "载具入库申请",
+        "operationId": "PdaService_BoxInbound",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BoxInboundRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/PdaService": {
+      "post": {
+        "tags": [
+          "PdaService"
+        ],
+        "summary": "成品上架申请",
+        "operationId": "PdaService_ProductToShelvesReq",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductStoreToShelvesRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WmsResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/api/WcsService/WcsReport": {
+      "post": {
+        "tags": [
+          "WcsService"
+        ],
+        "summary": "WCS任务信息上报服务接口",
+        "operationId": "WcsService_WcsReport",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WcsReportDataBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WcsResponseBody"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "AGVTaskInfo": {
-        "type": "object",
-        "properties": {
-          "taskNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "startLoc": {
-            "type": "string",
-            "nullable": true
-          },
-          "startCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startHeight": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "endLoc": {
-            "type": "string",
-            "nullable": true
-          },
-          "endCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "endHeight": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "taskType": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pallettype": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "remark": {
-            "type": "string",
-            "nullable": true
-          },
-          "tmestamp": {
-            "type": "string",
-            "nullable": true
-          }
+  "definitions": {
+    "AgvTaskBody": {
+      "description": "AGV任务信息实体类",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "int64",
+          "description": "索引；默认与TaskIndex相同",
+          "type": "integer"
         },
-        "additionalProperties": false
-      },
-      "AGVTaskResult": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "errCode": {
-            "type": "string",
-            "nullable": true
-          }
+        "TaskIndex": {
+          "format": "int64",
+          "description": "任务号",
+          "type": "integer"
         },
-        "additionalProperties": false
-      },
-      "BaseMaterial": {
-        "type": "object",
-        "properties": {
-          "f_ID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "f_MaterialCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_Pattern": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_Spec": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_Level": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_LoadIndex": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_Board": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_Piece": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_MouldSeries": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "f_TrademarkID": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "f_ElectroplateFlag": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_MouldCategory": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "f_ReceiveCell": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "f_Remark": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_CreateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
+        "Type": {
+          "format": "int32",
+          "description": "任务类型；默认104",
+          "type": "integer"
         },
-        "additionalProperties": false
-      },
-      "BaseMaterialResponseBody": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "msg": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BaseMaterial"
-            },
-            "nullable": true
-          },
-          "count": {
-            "type": "integer",
-            "format": "int32"
-          }
+        "Priority": {
+          "format": "int32",
+          "description": "任务优先级；默认0",
+          "type": "integer"
         },
-        "additionalProperties": false
-      },
-      "ErpStockTaskBody": {
-        "type": "object",
-        "properties": {
-          "pallectCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "palletCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "palletType": {
-            "type": "string",
-            "nullable": true
-          },
-          "taskType": {
-            "type": "string",
-            "nullable": true
-          },
-          "taskCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "stationID": {
-            "type": "string",
-            "nullable": true
-          },
-          "materialCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "string",
-            "nullable": true
-          }
+        "StartPoint": {
+          "description": "起点坐标",
+          "type": "string"
         },
-        "additionalProperties": false
-      },
-      "ResponseBody": {
-        "type": "object",
-        "properties": {
-          "reqNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "msg": {
-            "type": "string",
-            "nullable": true
-          }
+        "EndPoint": {
+          "description": "终点坐标",
+          "type": "string"
         },
-        "additionalProperties": false
-      },
-      "ServiceResponceBody": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "msg": {
-            "type": "string",
-            "nullable": true
-          }
+        "State": {
+          "format": "int32",
+          "description": "状态值；默认0",
+          "type": "integer"
+        }
+      }
+    },
+    "WmsResponseBody": {
+      "description": "wms服务接口返回信息",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "请求任务号",
+          "type": "string"
         },
-        "additionalProperties": false
-      },
-      "WcsReportDataBody": {
-        "type": "object",
-        "properties": {
-          "f_TimeStamp": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_ReportType": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_WmsTaskID": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_WcsTaskID": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_ErrorMsg": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_StationID": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_ReportVal": {
-            "type": "string",
-            "nullable": true
-          },
-          "f_ReportTime": {
-            "type": "string",
-            "nullable": true
-          }
+        "Code": {
+          "description": "状态码",
+          "type": "string"
         },
-        "additionalProperties": false
-      },
-      "WeatherForecast": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "temperatureC": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "summary": {
-            "type": "string",
-            "nullable": true
-          }
+        "Msg": {
+          "description": "消息",
+          "type": "string"
+        }
+      }
+    },
+    "AgvReportBody": {
+      "description": "AGV上报信息实体类",
+      "type": "object",
+      "properties": {
+        "TaskIndex": {
+          "format": "int64",
+          "description": "任务号",
+          "type": "integer"
         },
-        "additionalProperties": false
+        "State": {
+          "format": "int32",
+          "description": "状态值；默认0",
+          "type": "integer"
+        }
+      }
+    },
+    "AgvResponseBody": {
+      "description": "AGV服务接口返回信息",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "消息",
+          "type": "string"
+        }
+      }
+    },
+    "ProductPrepareRequestBody": {
+      "description": "成品备货请求实体类",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "申请任务号",
+          "type": "string"
+        },
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "备货成品信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductPrepareBody"
+          }
+        }
+      }
+    },
+    "ProductPrepareBody": {
+      "description": "备货成品信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "Qty": {
+          "description": "数量",
+          "type": "string"
+        }
+      }
+    },
+    "ReportProductOutboundBody": {
+      "description": "成品出库上报实体类",
+      "type": "object",
+      "properties": {
+        "ReqTime": {
+          "description": "上报时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "上报信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductOutboundBody"
+          }
+        }
+      }
+    },
+    "ProductOutboundBody": {
+      "description": "出库成品信息",
+      "type": "object",
+      "properties": {
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "出库申请：申请数量；返库申请：WMS送料时传入的数量",
+          "type": "number"
+        }
+      }
+    },
+    "ProductMoveOrOutReqBody": {
+      "description": "成品上架或直接出库申请实体类",
+      "type": "object",
+      "properties": {
+        "ReqTime": {
+          "description": "上报时间",
+          "type": "string"
+        },
+        "ReqType": {
+          "description": "申请类型；Up:上架  Out:直接出库",
+          "type": "string"
+        },
+        "BarcodeList": {
+          "description": "条码信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoxBarcodesBody"
+          }
+        }
+      }
+    },
+    "BoxBarcodesBody": {
+      "description": "成品箱条码信息",
+      "type": "object",
+      "properties": {
+        "Barcode": {
+          "description": "成品箱条码",
+          "type": "string"
+        }
+      }
+    },
+    "LiftSyncInventoryBody": {
+      "description": "垂直升降库库存同步信息",
+      "type": "object",
+      "properties": {
+        "ReqTime": {
+          "description": "同步时间",
+          "type": "string"
+        },
+        "TaskType": {
+          "description": "任务类型：In(增加)，Out(减少)，Init(初始化)",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "库存明细列表",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiftInventoryItemBody"
+          }
+        }
+      }
+    },
+    "LiftInventoryItemBody": {
+      "description": "垂直升降库库存明细信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        },
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "库存数量",
+          "type": "number"
+        },
+        "BatchNo": {
+          "description": "批次号",
+          "type": "string"
+        }
+      }
+    },
+    "MaterialQueryResponseBody": {
+      "description": "WMS管理物料基础信息查询实体",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "消息",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "物料信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalMaterialBody"
+          }
+        }
+      }
+    },
+    "LocalMaterialBody": {
+      "description": "WMS管理物料基础信息实体",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        },
+        "MaterialSpec": {
+          "description": "原材料规格",
+          "type": "string"
+        },
+        "MaterialUnit": {
+          "description": "单位",
+          "type": "string"
+        },
+        "MaterialCategoryID": {
+          "description": "物料类别索引",
+          "type": "string"
+        },
+        "MaterialCategoryName": {
+          "description": "物料类别名称",
+          "type": "string"
+        },
+        "MaterialValidity": {
+          "description": "有效期(天)",
+          "type": "string"
+        }
+      }
+    },
+    "MesRequestOutboundTaskBody": {
+      "description": "MES请求物料自动出库任务信息实体类",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "申请任务号",
+          "type": "string"
+        },
+        "StationCode": {
+          "description": "申请机台号",
+          "type": "string"
+        },
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "TaskList": {
+          "description": "任务明细信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MesRequestTaskDetailBody"
+          }
+        }
+      }
+    },
+    "MesRequestTaskDetailBody": {
+      "description": "Mes请求出库任务明细信息实体类",
+      "type": "object",
+      "properties": {
+        "LineCode": {
+          "description": "机台关联的输送线编号",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "物料明细信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MesRequestMaterialBody"
+          }
+        }
+      }
+    },
+    "MesRequestMaterialBody": {
+      "description": "物料信息实体类",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        },
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "出库申请：申请数量；返库申请：WMS送料时传入的数量",
+          "type": "number"
+        },
+        "ConsumedQty": {
+          "format": "double",
+          "description": "物料消耗数量",
+          "type": "number"
+        },
+        "EmptyFlag": {
+          "description": "空轴标识（导线和端子用）；Y: 空   N: 非空；如果是模具，则默认填写'N'。",
+          "type": "string"
+        },
+        "MaterialPS": {
+          "description": "包装规格；成品入库时用",
+          "type": "string"
+        }
+      }
+    },
+    "MesRequestManuallyOutboundBody": {
+      "description": "MES请求物料人工出库任务信息实体类",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "申请任务号",
+          "type": "string"
+        },
+        "StationCode": {
+          "description": "申请机台号",
+          "type": "string"
+        },
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "任务明细信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManuallyOutboundMaterialBody"
+          }
+        }
+      }
+    },
+    "ManuallyOutboundMaterialBody": {
+      "description": "物料信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "出库申请：申请数量；返库申请：WMS送料时传入的数量",
+          "type": "number"
+        }
+      }
+    },
+    "MesIssuePlanQuery": {
+      "description": "领料计划查询",
+      "type": "object",
+      "properties": {
+        "PlanCode": {
+          "description": "申请计划号",
+          "type": "string"
+        },
+        "Code": {
+          "description": "状态码",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "消息",
+          "type": "string"
+        },
+        "PlanList": {
+          "description": "计划明细",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssuePlanList"
+          }
+        }
+      }
+    },
+    "IssuePlanList": {
+      "description": "计划明细信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "IssueQty": {
+          "format": "double",
+          "description": "发料数量",
+          "type": "number"
+        }
+      }
+    },
+    "MesRequestReturnTaskBody": {
+      "description": "MES请求物料返库任务信息实体类",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "申请任务号",
+          "type": "string"
+        },
+        "StationCode": {
+          "description": "申请机台号",
+          "type": "string"
+        },
+        "LineCode": {
+          "description": "机台关联的输送线编号",
+          "type": "string"
+        },
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "物料明细信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MesRequestMaterialBody"
+          }
+        }
+      }
+    },
+    "MesStationRotationReportBody": {
+      "description": "Mes发送机台旋转通知信息实体类",
+      "type": "object",
+      "properties": {
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "StationList": {
+          "description": "机台信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationReportBody"
+          }
+        }
+      }
+    },
+    "StationReportBody": {
+      "description": "机台信息实体类",
+      "type": "object",
+      "properties": {
+        "StationCode": {
+          "description": "机台号",
+          "type": "string"
+        },
+        "LineCode": {
+          "description": "机台关联的输送线编号",
+          "type": "string"
+        }
+      }
+    },
+    "MesRequestChangeInventoryBody": {
+      "description": "Mes请求更改物料库存数量实体类",
+      "type": "object",
+      "properties": {
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "申请信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChangeInventoryBody"
+          }
+        }
+      }
+    },
+    "ChangeInventoryBody": {
+      "description": "要更改库存的明细信息",
+      "type": "object",
+      "properties": {
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "出库申请：申请数量；返库申请：WMS送料时传入的数量",
+          "type": "number"
+        }
+      }
+    },
+    "ProductInboundRequestBody": {
+      "description": "成品入库请求实体类",
+      "type": "object",
+      "properties": {
+        "TaskCode": {
+          "description": "申请任务号",
+          "type": "string"
+        },
+        "StationCode": {
+          "description": "机台号",
+          "type": "string"
+        },
+        "MaterialPS": {
+          "description": "包装类型",
+          "type": "string"
+        },
+        "ReqTime": {
+          "description": "申请时间",
+          "type": "string"
+        },
+        "MaterialList": {
+          "description": "入库成品信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductBody"
+          }
+        }
+      }
+    },
+    "ProductBody": {
+      "description": "入库成品信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialBarcode": {
+          "description": "箱条码",
+          "type": "string"
+        },
+        "BatchNo": {
+          "description": "批次号",
+          "type": "string"
+        },
+        "Qty": {
+          "description": "数量",
+          "type": "string"
+        }
+      }
+    },
+    "UserValidaitonRequestBody": {
+      "description": "用户校验申请信息",
+      "type": "object",
+      "properties": {
+        "UserCode": {
+          "description": "用户编码",
+          "type": "string"
+        },
+        "LoginPwd": {
+          "description": "登陆密码",
+          "type": "string"
+        }
+      }
+    },
+    "UserValidationResponseBody": {
+      "description": "用户校验返回信息",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码 0：失败  大于0成功",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的消息",
+          "type": "string"
+        },
+        "Data": {
+          "$ref": "#/definitions/UserBody",
+          "description": "用户信息"
+        }
+      }
+    },
+    "UserBody": {
+      "description": "用户信息",
+      "type": "object",
+      "properties": {
+        "ID": {
+          "format": "int64",
+          "description": "用户ID",
+          "type": "integer"
+        },
+        "UserCode": {
+          "description": "用户编码",
+          "type": "string"
+        },
+        "UserName": {
+          "description": "用户名称",
+          "type": "string"
+        },
+        "LoginPwd": {
+          "description": "登陆密码",
+          "type": "string"
+        },
+        "RelationRoleID": {
+          "format": "int64",
+          "description": "关联角色索引",
+          "type": "integer"
+        },
+        "RelationRoleName": {
+          "description": "关联角色名称",
+          "type": "string"
+        }
+      }
+    },
+    "WarehouseQueryResponseBody": {
+      "description": "仓库查询返回的信息",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码； 200：成功     500：失败",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的异常信息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "返回的仓库信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WarehouseBody"
+          }
+        }
+      }
+    },
+    "WarehouseBody": {
+      "description": "仓库信息",
+      "type": "object",
+      "properties": {
+        "WarehouseID": {
+          "format": "int64",
+          "description": "仓库索引",
+          "type": "integer"
+        },
+        "WarehouseCode": {
+          "description": "仓库编码",
+          "type": "string"
+        },
+        "WarehouseName": {
+          "description": "仓库名称",
+          "type": "string"
+        }
+      }
+    },
+    "StationQueryRequestBody": {
+      "description": "站台查询实体类",
+      "type": "object",
+      "properties": {
+        "WarehouseID": {
+          "format": "int64",
+          "description": "仓库索引",
+          "type": "integer"
+        },
+        "StationType": {
+          "description": "站台类型；In:入库站台    Out:出库站台",
+          "type": "string"
+        }
+      }
+    },
+    "StationQueryResponseBody": {
+      "description": "站台查询返回信息实体类",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "异常信息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "站台信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationBody"
+          }
+        }
+      }
+    },
+    "StationBody": {
+      "description": "站台信息实体类",
+      "type": "object",
+      "properties": {
+        "StationID": {
+          "format": "int64",
+          "description": "站台索引",
+          "type": "integer"
+        },
+        "StationName": {
+          "description": "站台名称",
+          "type": "string"
+        }
+      }
+    },
+    "PlanQueryResponseBody": {
+      "description": "计划查询返回实体类",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码 0：失败  大于0成功",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的消息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "计划主表信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanBody"
+          }
+        }
+      }
+    },
+    "PlanBody": {
+      "description": "计划主表信息实体类",
+      "type": "object",
+      "properties": {
+        "PlanID": {
+          "format": "int64",
+          "description": "计划索引",
+          "type": "integer"
+        },
+        "AutoFlag": {
+          "format": "int32",
+          "description": "自动执行标识；默认为0，手工执行",
+          "type": "integer"
+        },
+        "LocalPlanCode": {
+          "description": "wms本地计划编号",
+          "type": "string"
+        },
+        "RemotePlanCode": {
+          "description": "Mes申请任务号",
+          "type": "string"
+        },
+        "PlanType": {
+          "description": "计划类型编码",
+          "type": "string"
+        },
+        "PlanTypeName": {
+          "description": "计划类型名称",
+          "type": "string"
+        },
+        "PlanStatus": {
+          "description": "计划状态编码",
+          "type": "string"
+        },
+        "PlanStatusName": {
+          "description": "计划状态名称",
+          "type": "string"
+        },
+        "StationID": {
+          "format": "int64",
+          "description": "Mes要料机台索引",
+          "type": "integer"
+        },
+        "StationName": {
+          "description": "Mes要料机台名称",
+          "type": "string"
+        },
+        "CreateTime": {
+          "description": "计划创建时间",
+          "type": "string"
+        },
+        "FromWarehouse": {
+          "description": "仓库名称",
+          "type": "string"
+        }
+      }
+    },
+    "PlanListQueryResponseBody": {
+      "description": "计划明细查询返回实体类",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码 0：失败  大于0成功",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的消息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "计划主表信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanListBody"
+          }
+        }
+      }
+    },
+    "PlanListBody": {
+      "description": "计划明细信息实体类",
+      "type": "object",
+      "properties": {
+        "PlanListID": {
+          "format": "int64",
+          "description": "计划明细索引",
+          "type": "integer"
+        },
+        "MaterialID": {
+          "format": "int64",
+          "description": "物料索引",
+          "type": "integer"
+        },
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        },
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "MaterialCategoryID": {
+          "format": "int64",
+          "description": "物料类别索引",
+          "type": "integer"
+        },
+        "MaterialCategoryName": {
+          "description": "物料类别名称",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "计划数量",
+          "type": "number"
+        },
+        "ConsumedQty": {
+          "format": "double",
+          "description": "消耗数量",
+          "type": "number"
+        },
+        "EmptyFlag": {
+          "description": "空轴标识",
+          "type": "string"
+        },
+        "PackingCategory": {
+          "format": "int64",
+          "description": "包装类型索引",
+          "type": "integer"
+        },
+        "PackingCategoryName": {
+          "description": "包装类型名称",
+          "type": "string"
+        },
+        "PlanListStatus": {
+          "description": "计划明细状态编码",
+          "type": "string"
+        },
+        "PlanListStatusName": {
+          "description": "计划明细状态名称",
+          "type": "string"
+        },
+        "BeginTime": {
+          "description": "开始时间",
+          "type": "string"
+        },
+        "CompleteTime": {
+          "description": "完成时间",
+          "type": "string"
+        }
+      }
+    },
+    "PlanSeqQueryResponseBody": {
+      "description": "计划指令查询返回信息实体类",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码 0：失败  大于0成功",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的消息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "物料清单信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanSeqQueryMaterialBody"
+          }
+        }
+      }
+    },
+    "PlanSeqQueryMaterialBody": {
+      "description": "计划指令物料清单实体类",
+      "type": "object",
+      "properties": {
+        "WarehouseID": {
+          "format": "int64",
+          "description": "存储仓库索引",
+          "type": "integer"
+        },
+        "WarehouseName": {
+          "description": "存储仓库名称",
+          "type": "string"
+        },
+        "StoreCellCode": {
+          "description": "存储位置",
+          "type": "string"
+        },
+        "MaterialID": {
+          "format": "int64",
+          "description": "物料索引",
+          "type": "integer"
+        },
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        },
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "BatchNo": {
+          "description": "批次号",
+          "type": "string"
+        },
+        "Qty": {
+          "format": "double",
+          "description": "数量",
+          "type": "number"
+        }
+      }
+    },
+    "MaterialInboundRequestBody": {
+      "description": "原材料入库申请实体类",
+      "type": "object",
+      "properties": {
+        "WarehouseID": {
+          "format": "int64",
+          "description": "仓库索引",
+          "type": "integer"
+        },
+        "StationID": {
+          "format": "int64",
+          "description": "站台索引",
+          "type": "integer"
+        },
+        "MaterialBarcode": {
+          "description": "物料条码",
+          "type": "string"
+        },
+        "OperatorID": {
+          "format": "int64",
+          "description": "操作员索引",
+          "type": "integer"
+        }
+      }
+    },
+    "PlanExecuteRequestBody": {
+      "description": "申请计划执行实体类",
+      "type": "object",
+      "properties": {
+        "LocalPlanCode": {
+          "description": "wms本地计划编号",
+          "type": "string"
+        },
+        "UserID": {
+          "format": "int64",
+          "description": "操作员索引",
+          "type": "integer"
+        },
+        "UserCode": {
+          "description": "操作员编码",
+          "type": "string"
+        },
+        "UserName": {
+          "description": "操作员名称",
+          "type": "string"
+        }
+      }
+    },
+    "MaterialGroupBoxRequestBody": {
+      "description": "原料组箱申请实体类",
+      "type": "object",
+      "properties": {
+        "LocalPlanCode": {
+          "description": "wms本地计划编号",
+          "type": "string"
+        },
+        "UserID": {
+          "format": "int64",
+          "description": "操作员索引",
+          "type": "integer"
+        },
+        "Barcodes": {
+          "description": "物料组箱条码信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaterialBarcodesBody"
+          }
+        }
+      }
+    },
+    "MaterialBarcodesBody": {
+      "description": "组箱条码信息实体类",
+      "type": "object",
+      "properties": {
+        "Barcode": {
+          "description": "物料条码",
+          "type": "string"
+        }
+      }
+    },
+    "BoxQueryResponseBody": {
+      "description": "载具查询返回的信息",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "状态码； 200：成功     500：失败",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "失败返回的异常信息",
+          "type": "string"
+        },
+        "Data": {
+          "description": "返回的载具信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoxBody"
+          }
+        }
+      }
+    },
+    "BoxBody": {
+      "description": "载具信息",
+      "type": "object",
+      "properties": {
+        "MaterialCode": {
+          "description": "物料编码",
+          "type": "string"
+        },
+        "MaterialName": {
+          "description": "物料名称",
+          "type": "string"
+        }
+      }
+    },
+    "BoxInboundRequestBody": {
+      "description": "载具入库申请实体类",
+      "type": "object",
+      "properties": {
+        "StationID": {
+          "format": "int64",
+          "description": "入库站台索引",
+          "type": "integer"
+        },
+        "MaterialCode": {
+          "description": "载具编号",
+          "type": "string"
+        }
+      }
+    },
+    "ProductStoreToShelvesRequestBody": {
+      "description": "成品上架申请实体类",
+      "type": "object",
+      "properties": {
+        "StationID": {
+          "format": "int64",
+          "description": "站台索引",
+          "type": "integer"
+        },
+        "BoxBarcodes": {
+          "description": "成品箱码信息",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoxBarcodesBody"
+          }
+        }
+      }
+    },
+    "WcsReportDataBody": {
+      "description": "wcs上报信息",
+      "type": "object",
+      "properties": {
+        "F_TimeStamp": {
+          "description": "上报任务号",
+          "type": "string"
+        },
+        "F_ReportType": {
+          "description": "上报类型：\r\nPALLET_SIZE_ERROR：托盘超宽\r\nBARCODE：托盘条码\r\nPALLET_HEIGHT：托盘高度\r\nPALLET_WEIGHT：托盘重量\r\nVISION_CHECK：视觉核验\r\nTASK_REPORT：任务状态\r\nSWITCH_GROUP:开关组合值",
+          "type": "string"
+        },
+        "F_WmsTaskID": {
+          "description": "管理任务索引",
+          "type": "string"
+        },
+        "F_WcsTaskID": {
+          "description": "调度任务索引",
+          "type": "string"
+        },
+        "F_ErrorMsg": {
+          "description": "异常消息",
+          "type": "string"
+        },
+        "F_StationID": {
+          "description": "站台索引",
+          "type": "string"
+        },
+        "F_ReportVal": {
+          "description": "上报内容",
+          "type": "string"
+        },
+        "F_ReportTime": {
+          "description": "上报时间",
+          "type": "string"
+        }
+      }
+    },
+    "WcsResponseBody": {
+      "description": "wcs服务接口返回信息",
+      "type": "object",
+      "properties": {
+        "ReqNo": {
+          "description": "请求任务号",
+          "type": "string"
+        },
+        "Code": {
+          "description": "状态码",
+          "type": "string"
+        },
+        "Msg": {
+          "description": "消息",
+          "type": "string"
+        }
       }
     }
+  },
+  "ControllerDesc": {
+    "WcsService": "WCS相关服务接口",
+    "PdaService": "PDA相关服务接口",
+    "LiftWmsService": "垂直升降库相关服务接口",
+    "FactoryWmsService": "厂级WMS相关服务接口",
+    "MesService": "Mes相关服务接口",
+    "AgvService": "Agv相关服务接口"
   }
 }

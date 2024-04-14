@@ -3,15 +3,19 @@ using Microsoft.Maui.Graphics;
 
 namespace Elite.LMS.Maui.Views;
 
-public class TitleViewFix : Grid {
+public class TitleViewFix : Grid
+{
     bool isMeasured;
-    public TitleViewFix() {
+    public TitleViewFix()
+    {
     }
-    protected override Size MeasureOverride(double widthConstraint, double heightConstraint) {
+    protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
+    {
         this.isMeasured = true;
         return base.MeasureOverride(widthConstraint, heightConstraint);
     }
-    protected override Size ArrangeOverride(Rect bounds) {
+    protected override Size ArrangeOverride(Rect bounds)
+    {
         if (!this.isMeasured)
             Measure(bounds.Width, double.PositiveInfinity, MeasureFlags.None);
         if (bounds.Height == 0)
